@@ -24,3 +24,17 @@ venv/
 # Backend
 backend/biogas.db
 backend/biogas.db-journal
+backend/data/
+
+# Node
+node_modules/
+.next/
+.nuxt/
+dist/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~

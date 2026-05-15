@@ -40,9 +40,6 @@ def do_run_migrations(connection: Connection) -> None:
 
 async def run_async_migrations() -> None:
     configuration = config.get_section(config.config_ini_section, {})
-    configuration["sqlalchemy.url"] = configuration.get(
-        "sqlalchemy.url", ""
-    ).replace("sqlite+aiosqlite://", "sqlite+aiosqlite://")
 
     connectable = async_engine_from_config(
         configuration,
