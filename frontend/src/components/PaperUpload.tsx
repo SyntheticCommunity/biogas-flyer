@@ -10,11 +10,12 @@ import { fetchAPI } from "@/lib/api";
 async function uploadPaperFile(file: File): Promise<{ id: string }> {
   const token =
     typeof window !== "undefined" ? localStorage.getItem("token") : null;
+  const apiBase = process.env.NEXT_PUBLIC_API_URL ?? "/api";
 
   const formData = new FormData();
   formData.append("file", file);
 
-  const res = await fetch("/api/papers/upload", {
+  const res = await fetch(`${apiBase}/biogas/papers/upload`, {
     method: "POST",
     headers: token ? { Authorization: `Bearer ${token}` } : {},
     body: formData,
@@ -73,7 +74,7 @@ export default function PaperUpload() {
   /* Mutation: trigger paper processing after upload */
   const processMutation = useMutation({
     mutationFn: (paperId: string) =>
-      fetchAPI<{ id: string }>(`/papers/${paperId}/process`, {
+      fetchAPI<{ id: string }>(`/biogas/papers/${paperId}/process`, {
         method: "POST",
       }),
   });

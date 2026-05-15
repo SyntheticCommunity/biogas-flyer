@@ -36,7 +36,7 @@ export default function QAPanel({ articleId }: QAPanelProps) {
 
     try {
       const res = await fetchAPI<{ answer: string; session_id: string }>(
-        "/qa",
+        "/biogas/qa",
         {
           method: "POST",
           body: JSON.stringify({

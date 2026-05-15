@@ -92,14 +92,14 @@ export default function AdminPage() {
     error,
   } = useQuery<Paper[]>({
     queryKey: ["admin-papers"],
-    queryFn: () => fetchAPI<Paper[]>("/admin/papers"),
+    queryFn: () => fetchAPI<Paper[]>("/biogas/admin/papers"),
     enabled: !!user && isAdmin(),
   });
 
   /* Retry mutation for failed papers. */
   const retryMutation = useMutation({
     mutationFn: (paperId: string) =>
-      fetchAPI<Paper>(`/papers/${paperId}/process`, { method: "POST" }),
+      fetchAPI<Paper>(`/biogas/papers/${paperId}/process`, { method: "POST" }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["admin-papers"] });
     },

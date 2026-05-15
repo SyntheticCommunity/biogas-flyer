@@ -53,7 +53,7 @@ export default function PostPage() {
 
   const { data: article, isLoading, error } = useQuery<Article>({
     queryKey: ["article", slug],
-    queryFn: () => fetchAPI<Article>(`/articles/${slug}`),
+    queryFn: () => fetchAPI<Article>(`/biogas/articles/${slug}`),
     enabled: !!slug,
   });
 

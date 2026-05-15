@@ -32,7 +32,7 @@ function ArticleListSkeleton() {
 export default function HomePage() {
   const { data: articles, isLoading, error } = useQuery<ArticleListItem[]>({
     queryKey: ["articles"],
-    queryFn: () => fetchAPI<ArticleListItem[]>("/articles"),
+    queryFn: () => fetchAPI<ArticleListItem[]>("/biogas/articles"),
   });
 
   return (
