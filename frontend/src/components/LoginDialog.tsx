@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { fetchAPI } from "@/lib/api";
 import { useAuthStore } from "@/stores/auth";
 
@@ -10,61 +10,36 @@ interface LoginDialogProps {
 }
 
 export default function LoginDialog({ open, onClose }: LoginDialogProps) {
-  const [qrUrl, setQrUrl] = useState<string | null>(null);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
   const setAuth = useAuthStore((s) => s.setAuth);
 
-  // Fetch QR code URL when dialog opens
-  useEffect(() => {
-    if (!open) {
-      setQrUrl(null);
-      setError(null);
-      return;
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    setLoading(true);
+
+    try {
+      const loginResult = await fetchAPI<{ data: { access_token: string } }>("/auth/login", {
+        method: "POST",
+        body: JSON.stringify({ username, password }),
+      });
+
+      const token = loginResult.data.access_token;
+      localStorage.setItem("token", token);
+
+      const meResult = await fetchAPI<{ data: { id: number; username: string; display_name: string | null; role: string } }>("/auth/me");
+      setAuth({ id: String(meResult.data.id), name: meResult.data.display_name || meResult.data.username, avatar_url: null, is_admin: meResult.data.role === "admin" }, token);
+      onClose();
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : "登录失败";
+      setError(msg);
+    } finally {
+      setLoading(false);
     }
-
-    let cancelled = false;
-
-    fetchAPI<{ url: string }>("/auth/wechat/qrcode")
-      .then(({ url }) => {
-        if (!cancelled) setQrUrl(url);
-      })
-      .catch((err) => {
-        if (!cancelled)
-          setError(err instanceof Error ? err.message : "无法加载二维码");
-      });
-
-    return () => {
-      cancelled = true;
-    };
-  }, [open]);
-
-  // Listen for OAuth callback via URL params
-  useEffect(() => {
-    if (!open) return;
-
-    const params = new URLSearchParams(window.location.search);
-    const token = params.get("token");
-    if (!token) return;
-
-    // Consume the token param from URL
-    const url = new URL(window.location.href);
-    url.searchParams.delete("token");
-    window.history.replaceState({}, "", url.toString());
-
-    // Fetch user profile with the token
-    localStorage.setItem("token", token);
-    fetchAPI<{ id: string; name: string | null; avatar_url: string | null; is_admin: boolean }>(
-      "/auth/me",
-    )
-      .then((user) => {
-        setAuth(user, token);
-        onClose();
-      })
-      .catch(() => {
-        localStorage.removeItem("token");
-        setError("登录失败，请重试");
-      });
-  }, [open, onClose, setAuth]);
+  };
 
   if (!open) return null;
 
@@ -76,7 +51,6 @@ export default function LoginDialog({ open, onClose }: LoginDialogProps) {
       }}
     >
       <div className="relative w-full max-w-sm rounded-2xl bg-white p-8 shadow-xl dark:bg-gray-900">
-        {/* Close button */}
         <button
           onClick={onClose}
           className="absolute right-3 top-3 rounded-full p-1.5 text-gray-400 transition hover:bg-gray-100 hover:text-gray-600 dark:hover:bg-gray-800"
@@ -88,31 +62,43 @@ export default function LoginDialog({ open, onClose }: LoginDialogProps) {
         </button>
 
         <h3 className="mb-2 text-center text-lg font-bold text-gray-900 dark:text-gray-100">
-          微信扫码登录
+          登录
         </h3>
         <p className="mb-6 text-center text-sm text-gray-500 dark:text-gray-400">
-          使用微信扫描下方二维码完成登录
+          使用账号密码登录
         </p>
 
-        {/* QR code area */}
-        <div className="flex items-center justify-center">
-          {error && (
-            <p className="text-sm text-red-500">{error}</p>
-          )}
-          {!error && !qrUrl && (
-            <div className="flex h-48 w-48 items-center justify-center rounded-lg bg-gray-100 dark:bg-gray-800">
-              <span className="text-sm text-gray-400">加载中...</span>
-            </div>
-          )}
-          {!error && qrUrl && (
-            <iframe
-              src={qrUrl}
-              className="h-56 w-56 rounded-lg border-0"
-              title="微信登录二维码"
-              sandbox="allow-scripts allow-same-origin"
-            />
-          )}
-        </div>
+        {error && <p className="mb-4 text-sm text-red-500 text-center">{error}</p>}
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <input
+            type="text"
+            placeholder="用户名"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-emerald-500 focus:outline-none dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100"
+          />
+          <input
+            type="password"
+            placeholder="密码"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-emerald-500 focus:outline-none dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100"
+          />
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full rounded-lg bg-emerald-600 py-2 text-sm font-medium text-white hover:bg-emerald-700 disabled:opacity-50"
+          >
+            {loading ? "登录中..." : "登录"}
+          </button>
+        </form>
+
+        <p className="mt-4 text-center text-xs text-gray-400">
+          没有账号？请先到 <a href="https://bio-spring.top" target="_blank" className="text-emerald-600 hover:underline">bio-spring.top</a> 注册
+        </p>
       </div>
     </div>
   );

@@ -10,7 +10,7 @@ from biogas.config import settings
 from biogas.database import Base
 
 # Import all models so Alembic can detect them
-from biogas.models import Article, Paper, QAMessage, User  # noqa: F401
+from biogas.models import Article, Paper, QAMessage  # noqa: F401
 
 config = context.config
 config.set_main_option("sqlalchemy.url", settings.database_url)

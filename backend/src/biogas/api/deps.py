@@ -1,57 +1,37 @@
-from datetime import datetime, timedelta, timezone
+"""Auth dependencies — verify tokens via api.bio-spring.top."""
 
-from fastapi import Depends, HTTPException, status
-from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
-from jose import JWTError, jwt
-from sqlalchemy import select
-from sqlalchemy.ext.asyncio import AsyncSession
+from __future__ import annotations
 
-from biogas.config import settings
-from biogas.database import get_db
-from biogas.models.user import User
+import httpx
+from fastapi import Depends, HTTPException, Header, status
 
-_bearer_scheme = HTTPBearer(auto_error=False)
+from biogas.services.auth_service import auth_service
 
 
-def create_access_token(openid: str) -> str:
-    expire = datetime.now(timezone.utc) + timedelta(days=settings.jwt_expire_days)
-    payload = {"sub": openid, "exp": expire}
-    return jwt.encode(payload, settings.jwt_secret, algorithm=settings.jwt_algorithm)
-
-
-async def get_current_user(
-    credentials: HTTPAuthorizationCredentials | None = Depends(_bearer_scheme),
-    db: AsyncSession = Depends(get_db),
-) -> User | None:
-    if credentials is None:
+async def get_current_user(authorization: str = Header(None)) -> dict | None:
+    if not authorization:
         return None
-
-    token = credentials.credentials
+    token = authorization.replace("Bearer ", "")
     try:
-        payload = jwt.decode(token, settings.jwt_secret, algorithms=[settings.jwt_algorithm])
-        openid: str | None = payload.get("sub")
-        if openid is None:
-            return None
-    except JWTError:
+        result = await auth_service.get_me(token)
+        return result.get("data")
+    except httpx.HTTPStatusError:
         return None
 
-    result = await db.execute(select(User).where(User.wechat_openid == openid))
-    return result.scalar_one_or_none()
 
-
-def require_user(user: User | None = Depends(get_current_user)) -> User:
+def require_user(user: dict | None = Depends(get_current_user)) -> dict:
     if user is None:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Not authenticated",
+            detail="未登录",
         )
     return user
 
 
-def require_admin(user: User = Depends(require_user)) -> User:
-    if not user.is_admin:
+def require_admin(user: dict = Depends(require_user)) -> dict:
+    if user.get("role") != "admin":
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
-            detail="Admin access required",
+            detail="需要管理员权限",
         )
     return user

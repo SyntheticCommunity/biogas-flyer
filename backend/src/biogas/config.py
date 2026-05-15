@@ -7,29 +7,19 @@ class Settings(BaseSettings):
 
     # Dashscope (Alibaba Cloud AI)
     dashscope_api_key: str = ""
-    dashscope_model: str = "qwen-plus"
+    dashscope_model: str = "qwen3.6-plus"
 
     # MinerU (document parsing)
     mineru_model_size: str = "small"
 
-    # WeChat
-    wechat_appid: str = ""
-    wechat_appsecret: str = ""
-    wechat_redirect_url: str = "https://biogas.bio-spring.top/api/auth/wechat/callback"
+    # Auth API (api.bio-spring.top)
+    auth_api_url: str = "https://api.bio-spring.top/api/v1/auth"
 
     # Aliyun OSS
     aliyun_oss_access_key: str = ""
     aliyun_oss_secret_key: str = ""
     aliyun_oss_bucket: str = "biogas-papers"
     aliyun_oss_endpoint: str = "oss-cn-qingdao.aliyuncs.com"
-
-    # JWT
-    jwt_secret: str = "change-me-in-production"
-    jwt_algorithm: str = "HS256"
-    jwt_expire_days: int = 7
-
-    # Admin
-    admin_wechat_openid: str = ""
 
     # App
     base_url: str = "https://biogas.bio-spring.top"

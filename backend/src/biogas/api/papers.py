@@ -13,7 +13,6 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from biogas.api.deps import require_admin
 from biogas.database import get_db
 from biogas.models.paper import Paper
-from biogas.models.user import User
 from biogas.schemas.paper import PaperRead
 from biogas.services.oss import oss_service
 
@@ -26,7 +25,7 @@ _OSS_PREFIX = "papers/"
 @router.post("/upload", response_model=PaperRead, status_code=status.HTTP_201_CREATED)
 async def upload_paper(
     file: UploadFile,
-    user: User = Depends(require_admin),
+    user: dict = Depends(require_admin),
     db: AsyncSession = Depends(get_db),
 ) -> Paper:
     """Upload a PDF paper (admin only).
@@ -60,7 +59,7 @@ async def upload_paper(
 @router.post("/{paper_id}/process", response_model=PaperRead)
 async def process_paper_endpoint(
     paper_id: str,
-    user: User = Depends(require_admin),
+    user: dict = Depends(require_admin),
     db: AsyncSession = Depends(get_db),
 ) -> Paper:
     """Trigger background processing of a paper (admin only).
@@ -89,7 +88,7 @@ async def process_paper_endpoint(
     # Launch background processing task (lazy import to avoid circular deps).
     # The actual process_paper function will be implemented in Task 8.
     try:
-        from biogas.services.pipeline import process_paper  # type: ignore[import-not-found]
+        from biogas.tasks.process_paper import process_paper  # type: ignore[import-not-found]
 
         asyncio.create_task(process_paper(paper_id))
     except ImportError:

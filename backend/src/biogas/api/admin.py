@@ -8,7 +8,6 @@ from biogas.api.deps import require_admin
 from biogas.database import get_db
 from biogas.models.article import Article
 from biogas.models.paper import Paper
-from biogas.models.user import User
 from biogas.schemas.article import ArticleRead, ArticleUpdate
 from biogas.schemas.paper import PaperRead
 
@@ -17,7 +16,7 @@ router = APIRouter(prefix="/api/admin", tags=["admin"])
 
 @router.get("/papers", response_model=list[PaperRead])
 async def list_papers(
-    user: User = Depends(require_admin),
+    user: dict = Depends(require_admin),
     db: AsyncSession = Depends(get_db),
 ) -> list[Paper]:
     """Return all papers (admin only)."""
@@ -27,7 +26,7 @@ async def list_papers(
 
 @router.get("/articles", response_model=list[ArticleRead])
 async def list_all_articles(
-    user: User = Depends(require_admin),
+    user: dict = Depends(require_admin),
     db: AsyncSession = Depends(get_db),
 ) -> list[Article]:
     """Return all articles including drafts (admin only)."""
@@ -39,7 +38,7 @@ async def list_all_articles(
 async def update_article(
     article_id: str,
     payload: ArticleUpdate,
-    user: User = Depends(require_admin),
+    user: dict = Depends(require_admin),
     db: AsyncSession = Depends(get_db),
 ) -> Article:
     """Update article fields (admin only)."""
