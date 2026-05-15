@@ -8,3 +8,19 @@ resources/_gen/
 
 # Superpowers
 .superpowers/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+*.egg
+.venv/
+venv/
+.env
+
+# Backend
+backend/biogas.db
+backend/biogas.db-journal
