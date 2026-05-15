@@ -3,7 +3,7 @@ from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
     # Database
-    database_url: str = "sqlite+aiosqlite:///./biogas.db"
+    database_url: str = "sqlite+aiosqlite:///./data/biogas.db"
 
     # Dashscope (Alibaba Cloud AI)
     dashscope_api_key: str = ""
@@ -15,13 +15,13 @@ class Settings(BaseSettings):
     # WeChat
     wechat_appid: str = ""
     wechat_appsecret: str = ""
-    wechat_redirect_url: str = ""
+    wechat_redirect_url: str = "https://biogas.bio-spring.top/api/auth/wechat/callback"
 
     # Aliyun OSS
     aliyun_oss_access_key: str = ""
     aliyun_oss_secret_key: str = ""
-    aliyun_oss_bucket: str = ""
-    aliyun_oss_endpoint: str = ""
+    aliyun_oss_bucket: str = "biogas-papers"
+    aliyun_oss_endpoint: str = "oss-cn-qingdao.aliyuncs.com"
 
     # JWT
     jwt_secret: str = "change-me-in-production"
@@ -32,7 +32,7 @@ class Settings(BaseSettings):
     admin_wechat_openid: str = ""
 
     # App
-    base_url: str = "http://localhost:8000"
+    base_url: str = "https://biogas.bio-spring.top"
 
     model_config = {"env_file": ".env", "env_file_encoding": "utf-8"}
 

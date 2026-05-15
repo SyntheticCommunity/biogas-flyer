@@ -18,7 +18,7 @@ class Paper(Base):
     authors: Mapped[str | None] = mapped_column(String(512), nullable=True)
     journal: Mapped[str | None] = mapped_column(String(256), nullable=True)
     year: Mapped[int | None] = mapped_column(Integer, nullable=True)
-    file_path: Mapped[str | None] = mapped_column(String(512), nullable=True)
+    file_path: Mapped[str] = mapped_column(String(512), nullable=False)
     parsed_path: Mapped[str | None] = mapped_column(String(512), nullable=True)
     file_size: Mapped[int | None] = mapped_column(Integer, nullable=True)
     status: Mapped[str] = mapped_column(String(32), default="uploaded")
