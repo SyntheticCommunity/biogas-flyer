@@ -149,7 +149,7 @@ export default function PostPage() {
       )}
 
       {/* Q&A Panel */}
-      <QAPanel />
+      <QAPanel articleId={article.id} />
     </article>
   );
 }
