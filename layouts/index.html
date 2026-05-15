@@ -1,0 +1,50 @@
+{{ define "main" }}
+<div class="home-container">
+    {{ partial "hero.html" . }}
+
+    <div class="content-wrapper">
+        {{/* Featured post */}}
+        {{ $featured := where .Site.RegularPages "Params.featured" true }}
+        {{ if $featured }}
+        <section class="featured-section">
+            <h2 class="section-title">📌 最新发布</h2>
+            {{ range first 1 $featured }}
+            <a href="{{ .RelPermalink }}" class="featured-card">
+                <div class="featured-badge">推荐阅读</div>
+                <h3 class="featured-title">{{ .Title }}</h3>
+                {{ with .Params.subtitle }}
+                <p class="featured-subtitle">{{ . }}</p>
+                {{ end }}
+                <div class="featured-meta">
+                    <span>{{ .Date.Format "2006-01-02" }}</span>
+                    {{ with .Params.categories }}
+                    <span>{{ index . 0 }}</span>
+                    {{ end }}
+                </div>
+            </a>
+            {{ end }}
+        </section>
+        {{ end }}
+
+        {{/* All posts list */}}
+        <section class="posts-section">
+            <h2 class="section-title">📚 科普文章</h2>
+            {{ range .Site.RegularPages }}
+            <a href="{{ .RelPermalink }}" class="post-item">
+                <div class="post-icon">📄</div>
+                <div class="post-info">
+                    <h3 class="post-title">{{ .Title }}</h3>
+                    <div class="post-meta">
+                        <span>{{ .Date.Format "2006-01-02" }}</span>
+                        {{ with .Params.categories }}
+                        <span>{{ index . 0 }}</span>
+                        {{ end }}
+                    </div>
+                </div>
+                <div class="post-arrow">→</div>
+            </a>
+            {{ end }}
+        </section>
+    </div>
+</div>
+{{ end }}
