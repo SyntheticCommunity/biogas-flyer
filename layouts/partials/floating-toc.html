@@ -1,0 +1,11 @@
+{{ if .Params.Toc }}
+<div class="floating-toc" id="floating-toc">
+    <div class="toc-toggle" onclick="document.getElementById('floating-toc').classList.toggle('toc-expanded')">
+        📋
+    </div>
+    <div class="toc-content">
+        <div class="toc-title">目录</div>
+        {{ .TableOfContents }}
+    </div>
+</div>
+{{ end }}

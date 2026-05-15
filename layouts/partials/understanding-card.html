@@ -1,0 +1,10 @@
+{{ with .Params.understanding }}
+<div class="understanding-card">
+    <div class="understanding-title">📌 明白卡要点</div>
+    <ul class="understanding-list">
+        {{ range . }}
+        <li>✅ {{ . }}</li>
+        {{ end }}
+    </ul>
+</div>
+{{ end }}
