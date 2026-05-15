@@ -1,35 +1,9 @@
-# Hugo
-public/
-resources/_gen/
-.hugo_build.lock
-
 # OS
 .DS_Store
-
-# Superpowers
-.superpowers/
-
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.egg-info/
-dist/
-build/
-*.egg
-.venv/
-venv/
-.env
-
-# Backend
-backend/biogas.db
-backend/biogas.db-journal
-backend/data/
 
 # Node
 node_modules/
 .next/
-.nuxt/
 dist/
 
 # IDE
@@ -38,3 +12,10 @@ dist/
 *.swp
 *.swo
 *~
+
+# Env
+.env
+.env.local
+
+# Superpowers
+.superpowers/
