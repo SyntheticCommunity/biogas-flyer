@@ -1,3 +1,60 @@
-baseURL = 'https://example.org/'
-languageCode = 'en-us'
-title = 'My New Hugo Site'
+baseURL = "https://gas.bio-spring.top/"
+languageCode = "zh-cn"
+defaultContentLanguage = "zh"
+title = "沼液还田科普站"
+theme = "PaperMod"
+paginate = 10
+
+[params]
+  env = "production"
+  description = "科学种田 · 绿色循环 · 乡村振兴"
+  author = "华中农业大学土壤健康与绿色农业团队"
+  defaultTheme = "auto"
+  ShowShareButtons = false
+  ShowReadingTime = true
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+  ShowToc = true
+  TocOpen = false
+  comments = false
+
+  [params.homeInfoParams]
+    Title = "沼液还田科普站"
+    Content = "科学种田 · 绿色循环 · 乡村振兴"
+
+  [[params.socialIcons]]
+    name = "github"
+    url = "https://github.com/SyntheticCommunity"
+
+[menu]
+  [[menu.main]]
+    identifier = "posts"
+    name = "科普文章"
+    url = "/posts/"
+    weight = 10
+  [[menu.main]]
+    identifier = "tools"
+    name = "实用工具"
+    url = "/tools/"
+    weight = 20
+  [[menu.main]]
+    identifier = "about"
+    name = "关于我们"
+    url = "/about/"
+    weight = 30
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    style = "monokai"
+    lineNos = false
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
