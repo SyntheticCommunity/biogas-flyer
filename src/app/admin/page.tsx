@@ -10,7 +10,7 @@ import PaperUpload from "@/components/PaperUpload";
 /* ---------- types ---------- */
 
 interface Paper {
-  id: string;
+  id: number;
   title: string | null;
   authors: string | null;
   journal: string | null;
@@ -176,7 +176,7 @@ export default function AdminPage() {
                       className="bg-white dark:bg-gray-900"
                     >
                       <td className="px-4 py-3 text-gray-900 dark:text-gray-100">
-                        {paper.title ?? paper.id.slice(0, 8)}
+                        {paper.title ?? String(paper.id)}
                       </td>
                       <td className="px-4 py-3">
                         <span
