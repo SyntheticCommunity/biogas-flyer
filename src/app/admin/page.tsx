@@ -96,7 +96,7 @@ export default function AdminPage() {
 
   /* Retry mutation for failed papers. */
   const retryMutation = useMutation({
-    mutationFn: (paperId: string) =>
+    mutationFn: (paperId: number) =>
       fetchAPI<Paper>(`/biogas/papers/${paperId}/process`, { method: "POST" }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["admin-papers"] });
