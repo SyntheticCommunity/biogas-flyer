@@ -65,13 +65,11 @@ export default function AdminPage() {
   useEffect(() => {
     if (user || !token) return;
 
-    fetchAPI<{
-      id: string;
-      name: string | null;
-      avatar_url: string | null;
-      is_admin: boolean;
-    }>("/auth/me")
-      .then((u) => setAuth(u, token))
+    fetchAPI<{ data: { id: number; username: string; display_name: string | null; avatar_url: string | null; role: string } }>("/auth/me")
+      .then((res) => {
+        const u = res.data;
+        setAuth({ id: String(u.id), name: u.display_name || u.username, avatar_url: u.avatar_url, is_admin: u.role === "admin" }, token);
+      })
       .catch(() => {
         logout();
         router.replace("/login");
