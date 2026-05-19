@@ -51,7 +51,7 @@ export default function ShareCardButton() {
     <div className="flex flex-wrap gap-3">
       <button
         onClick={handleDownload}
-        className="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-emerald-700 active:bg-emerald-800"
+        className="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-emerald-700 active:bg-emerald-800 dark:bg-emerald-700 dark:hover:bg-emerald-600"
       >
         下载明白卡
       </button>

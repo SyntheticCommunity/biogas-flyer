@@ -20,8 +20,8 @@ export default function AboutPage() {
       <div className="mx-auto max-w-4xl px-6 py-12 md:px-12">
         {/* 团队介绍 */}
         <section className="mb-16">
-          <h2 className="mb-4 text-2xl font-bold text-gray-900">团队介绍</h2>
-          <p className="leading-relaxed text-gray-600">
+          <h2 className="mb-4 text-2xl font-bold text-gray-900 dark:text-gray-100">团队介绍</h2>
+          <p className="leading-relaxed text-gray-600 dark:text-gray-400">
             华中农业大学土壤健康与绿色农业团队长期从事土壤肥力、作物营养与农业废弃物资源化利用研究。
             团队依托华中农业大学资源与环境学院，在沼液还田、有机肥替代化肥等领域积累了丰富的科研成果和实践经验。
           </p>
@@ -33,10 +33,10 @@ export default function AboutPage() {
             ].map((item) => (
               <div
                 key={item.label}
-                className="rounded-xl border border-[#E5E1DB] bg-white p-5 text-center shadow-sm"
+                className="rounded-xl border border-[#E5E1DB] bg-white p-5 text-center shadow-sm dark:border-gray-700 dark:bg-gray-800"
               >
-                <div className="text-2xl font-bold text-[#1E3A5F]">{item.num}</div>
-                <div className="mt-1 text-sm text-gray-500">{item.label}</div>
+                <div className="text-2xl font-bold text-[#1E3A5F] dark:text-blue-300">{item.num}</div>
+                <div className="mt-1 text-sm text-gray-500 dark:text-gray-400">{item.label}</div>
               </div>
             ))}
           </div>
@@ -44,16 +44,16 @@ export default function AboutPage() {
 
         {/* 技术合作方 */}
         <section className="mb-16">
-          <h2 className="mb-4 text-2xl font-bold text-gray-900">技术合作方</h2>
-          <div className="rounded-xl border border-[#E5E1DB] bg-white p-6 shadow-sm">
-            <h3 className="text-lg font-bold text-[#1E3A5F]">
+          <h2 className="mb-4 text-2xl font-bold text-gray-900 dark:text-gray-100">技术合作方</h2>
+          <div className="rounded-xl border border-[#E5E1DB] bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+            <h3 className="text-lg font-bold text-[#1E3A5F] dark:text-blue-300">
               湖北长投双新环保科技有限公司
             </h3>
-            <p className="mt-3 leading-relaxed text-gray-600">
+            <p className="mt-3 leading-relaxed text-gray-600 dark:text-gray-400">
               湖北省农业废弃物资源化利用重点企业，专注于沼气工程、沼液处理与还田技术推广。
               公司与华中农业大学深度合作，将科研成果转化为可落地的农业生产方案，助力绿色循环农业发展。
             </p>
-            <p className="mt-3 text-sm text-gray-500">
+            <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">
               业务范围：沼液处理 &middot; 还田方案设计 &middot; 技术培训 &middot; 示范推广
             </p>
           </div>
@@ -61,28 +61,28 @@ export default function AboutPage() {
 
         {/* 联系方式 */}
         <section>
-          <h2 className="mb-4 text-2xl font-bold text-gray-900">联系我们</h2>
+          <h2 className="mb-4 text-2xl font-bold text-gray-900 dark:text-gray-100">联系我们</h2>
           <div className="grid gap-4 md:grid-cols-2">
-            <div className="rounded-xl border border-[#E5E1DB] bg-white p-5 shadow-sm space-y-4">
+            <div className="rounded-xl border border-[#E5E1DB] bg-white p-5 shadow-sm space-y-4 dark:border-gray-700 dark:bg-gray-800">
               <div>
-                <div className="text-sm font-semibold text-gray-900">邮箱</div>
-                <div className="text-sm text-[#1E3A5F]">slurry@hzau.edu.cn</div>
+                <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">邮箱</div>
+                <div className="text-sm text-[#1E3A5F] dark:text-blue-300">slurry@hzau.edu.cn</div>
               </div>
               <div>
-                <div className="text-sm font-semibold text-gray-900">电话</div>
-                <div className="text-sm text-gray-600">027-8728-XXXX</div>
+                <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">电话</div>
+                <div className="text-sm text-gray-600 dark:text-gray-400">027-8728-XXXX</div>
               </div>
             </div>
-            <div className="rounded-xl border border-[#E5E1DB] bg-white p-5 shadow-sm space-y-4">
+            <div className="rounded-xl border border-[#E5E1DB] bg-white p-5 shadow-sm space-y-4 dark:border-gray-700 dark:bg-gray-800">
               <div>
-                <div className="text-sm font-semibold text-gray-900">地址</div>
-                <div className="text-sm text-gray-600">
+                <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">地址</div>
+                <div className="text-sm text-gray-600 dark:text-gray-400">
                   武汉市洪山区华中农业大学资源与环境学院
                 </div>
               </div>
               <div>
-                <div className="text-sm font-semibold text-gray-900">网站</div>
-                <div className="text-sm text-[#1E3A5F]">biogas.bio-spring.top</div>
+                <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">网站</div>
+                <div className="text-sm text-[#1E3A5F] dark:text-blue-300">biogas.bio-spring.top</div>
               </div>
             </div>
           </div>

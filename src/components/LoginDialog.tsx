@@ -53,7 +53,7 @@ export default function LoginDialog({ open, onClose }: LoginDialogProps) {
       <div className="relative w-full max-w-sm rounded-2xl bg-white p-8 shadow-xl dark:bg-gray-900">
         <button
           onClick={onClose}
-          className="absolute right-3 top-3 rounded-full p-1.5 text-gray-400 transition hover:bg-gray-100 hover:text-gray-600 dark:hover:bg-gray-800"
+          className="absolute right-3 top-3 rounded-full p-1.5 text-gray-400 transition hover:bg-gray-100 hover:text-gray-600 dark:text-gray-500 dark:hover:bg-gray-800 dark:hover:text-gray-300"
           aria-label="关闭"
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -96,7 +96,7 @@ export default function LoginDialog({ open, onClose }: LoginDialogProps) {
           </button>
         </form>
 
-        <p className="mt-4 text-center text-xs text-gray-400">
+        <p className="mt-4 text-center text-xs text-gray-400 dark:text-gray-500">
           没有账号？请先到 <a href="https://bio-spring.top" target="_blank" className="text-emerald-600 hover:underline">bio-spring.top</a> 注册
         </p>
       </div>

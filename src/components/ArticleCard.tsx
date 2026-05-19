@@ -22,9 +22,9 @@ function formatDate(dateStr: string | null | undefined): string {
 }
 
 const categoryColors: Record<string, { bg: string; text: string }> = {
-  水稻: { bg: "bg-blue-50", text: "text-[#2E5A8F]" },
-  小麦: { bg: "bg-amber-50", text: "text-amber-700" },
-  蔬菜: { bg: "bg-red-50", text: "text-red-700" },
+  水稻: { bg: "bg-blue-50 dark:bg-blue-950", text: "text-[#2E5A8F] dark:text-blue-300" },
+  小麦: { bg: "bg-amber-50 dark:bg-amber-950", text: "text-amber-700 dark:text-amber-300" },
+  蔬菜: { bg: "bg-red-50 dark:bg-red-950", text: "text-red-700 dark:text-red-300" },
 };
 
 export default function ArticleCard({
@@ -34,21 +34,21 @@ export default function ArticleCard({
   category,
   publishedAt,
 }: ArticleCardProps) {
-  const colors = category ? categoryColors[category] ?? { bg: "bg-gray-100", text: "text-gray-600" } : null;
+  const colors = category ? categoryColors[category] ?? { bg: "bg-gray-100 dark:bg-gray-800", text: "text-gray-600 dark:text-gray-400" } : null;
 
   return (
     <Link
       href={`/posts/${slug}`}
-      className="group block rounded-xl border border-[#E5E1DB] bg-white p-5 shadow-sm transition hover:shadow-md"
+      className="group block rounded-xl border border-[#E5E1DB] bg-white p-5 shadow-sm transition hover:shadow-md dark:border-gray-700 dark:bg-gray-800"
     >
       <div className="flex items-start gap-3">
         <div className="h-12 w-0.5 shrink-0 rounded bg-[#C4880C] opacity-60 group-hover:opacity-100" />
         <div className="min-w-0 flex-1">
-          <h3 className="text-base font-semibold text-gray-900 group-hover:text-[#1E3A5F]">
+          <h3 className="text-base font-semibold text-gray-900 group-hover:text-[#1E3A5F] dark:text-gray-100 dark:group-hover:text-blue-300">
             {title}
           </h3>
           {subtitle && (
-            <p className="mt-1 line-clamp-2 text-sm text-gray-500">
+            <p className="mt-1 line-clamp-2 text-sm text-gray-500 dark:text-gray-400">
               {subtitle}
             </p>
           )}
@@ -58,10 +58,10 @@ export default function ArticleCard({
                 {category}
               </span>
             )}
-            <span className="text-xs text-gray-400">{formatDate(publishedAt)}</span>
+            <span className="text-xs text-gray-400 dark:text-gray-500">{formatDate(publishedAt)}</span>
           </div>
         </div>
-        <span className="shrink-0 text-gray-300 transition group-hover:text-[#1E3A5F]">
+        <span className="shrink-0 text-gray-300 transition group-hover:text-[#1E3A5F] dark:text-gray-600 dark:group-hover:text-blue-300">
           &rarr;
         </span>
       </div>

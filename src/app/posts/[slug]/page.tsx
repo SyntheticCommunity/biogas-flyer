@@ -97,13 +97,13 @@ export default function PostPage() {
       <header className="mb-8">
         <div className="flex items-center gap-2 mb-3">
           {article.category && (
-            <span className="inline-block rounded bg-blue-50 px-2.5 py-0.5 text-xs font-medium text-[#2E5A8F]">
+            <span className="inline-block rounded bg-blue-50 px-2.5 py-0.5 text-xs font-medium text-[#2E5A8F] dark:bg-blue-950 dark:text-blue-300">
               {article.category}
             </span>
           )}
           <time
             dateTime={article.published_at ?? ""}
-            className="text-xs text-gray-400"
+            className="text-xs text-gray-400 dark:text-gray-500"
           >
             {formatDate(article.published_at)}
           </time>
@@ -149,9 +149,9 @@ export default function PostPage() {
 
       {/* Source Citation + Download */}
       {article.source_citation && (
-        <div className="mb-10 rounded-xl border border-[#E5E1DB] bg-white p-5">
-          <div className="text-xs font-semibold text-gray-400">原始文献</div>
-          <div className="mt-1 text-sm text-gray-600">{article.source_citation}</div>
+        <div className="mb-10 rounded-xl border border-[#E5E1DB] bg-white p-5 dark:border-gray-700 dark:bg-gray-800">
+          <div className="text-xs font-semibold text-gray-400 dark:text-gray-500">原始文献</div>
+          <div className="mt-1 text-sm text-gray-600 dark:text-gray-400">{article.source_citation}</div>
           <button
             onClick={() => {
               if (user) {
@@ -167,7 +167,7 @@ export default function PostPage() {
             下载论文原文
           </button>
           {!user && (
-            <span className="ml-3 text-xs text-gray-400">登录后即可下载</span>
+            <span className="ml-3 text-xs text-gray-400 dark:text-gray-500">登录后即可下载</span>
           )}
         </div>
       )}
