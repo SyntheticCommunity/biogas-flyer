@@ -4,6 +4,8 @@
 
 面向农户和农技人员的沼液还田科研成果科普网站。纯展示站点，提供文章阅读和文献下载（登录后可下载原文 PDF）。
 
+管理功能（文献上传、PDF 解析、LLM 解读）已迁移至 `app.bio-spring.top` 的"还田科普"模块。
+
 ## 技术栈
 
 - Next.js 16 (App Router) + React 19 + Tailwind CSS 4
@@ -18,17 +20,18 @@
 src/
 ├── app/
 │   ├── page.tsx              首页（文章列表）
-│   ├── posts/[slug]/page.tsx 文章详情页
-│   ├── login/page.tsx        微信扫码登录
+│   ├── posts/[slug]/page.tsx 文章详情页（含 PDF 下载）
+│   ├── login/page.tsx        账号密码登录
 │   ├── layout.tsx            根布局
 │   └── providers.tsx         React Query Provider
 ├── components/
-│   ├── Header.tsx            导航栏
+│   ├── Header.tsx            导航栏（登录/注销）
 │   ├── HeroBanner.tsx        首页 Hero 区域
 │   ├── ArticleCard.tsx       文章卡片
 │   ├── UnderstandingCard.tsx 明白卡要点
 │   ├── ShareCardButton.tsx   明白卡分享（html2canvas）
-│   └── LoginDialog.tsx       登录弹窗
+│   ├── LoginDialog.tsx       登录弹窗
+│   └── Footer.tsx            页脚
 ├── lib/
 │   └── api.ts                API 请求工具（自动带 JWT）
 └── stores/
@@ -37,12 +40,13 @@ src/
 
 ## API 对接
 
-后端部署在 `api.bio-spring.top`，前端通过 `NEXT_PUBLIC_API_URL` 环境变量配置。
+后端部署在 `api.bio-spring.top`，前端通过 `NEXT_PUBLIC_API_URL` 环境变量配置（默认 `https://api.bio-spring.top/api/v1`）。
 
 主要 API 端点：
-- `GET /articles` — 文章列表
-- `GET /articles/{slug}` — 文章详情
-- `GET /auth/wechat/qrcode` — 微信登录二维码
+- `GET /articles` — 文章列表（公开）
+- `GET /articles/{slug}` — 文章详情（公开）
+- `GET /papers/{paper_id}/download` — 获取 PDF 签名 URL（需登录）
+- `POST /auth/login` — 账号密码登录
 - `GET /auth/me` — 当前用户信息
 
 ## 设计规范
