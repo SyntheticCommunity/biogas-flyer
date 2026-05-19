@@ -54,10 +54,13 @@ src/
 
 设计稿在 `design/biogas-website.pen`，包含移动端（390px）和桌面端（1200px）共 6 个页面。
 
-**色彩体系：**
-- 主色 `#1B4332`（深林绿）/ `#2D6A4F`（亮绿）
-- 点缀 `#C9960C`（暖金）
-- 背景 `#FAFAF8`（暖白）
+**色彩体系（CSS 变量，见 `globals.css`）：**
+- 主色 `#1E3A5F`（靛蓝）/ 亮色 `#2E5A8F`
+- 点缀 `#C4880C`（暖金）
+- 背景 `#FAF8F5`（暖白）/ 前景 `#1A1A1A`
+- 边框 `#E5E1DB`
+
+**深色模式：** 通过 `@media (prefers-color-scheme: dark)` 自动切换（Tailwind v4 默认），无需手动 toggle。所有组件需同时提供 `dark:` 变体类。暗色背景 `#111827`，卡片 `dark:bg-gray-800`，边框 `dark:border-gray-700`。
 
 **响应式断点：**
 - 移动端 `< 768px`：单栏布局
