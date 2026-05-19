@@ -151,41 +151,48 @@ export default function PostPage() {
       {article.source_citation && (
         <div className="mb-10 rounded-xl border border-[#E5E1DB] bg-white p-5 dark:border-gray-700 dark:bg-gray-800">
           <div className="text-xs font-semibold text-gray-400 dark:text-gray-500">原始文献</div>
-          <a
-            href="#"
-            onClick={async (e) => {
-              e.preventDefault();
-              if (user && article.paper_id) {
-                try {
-                  const token = localStorage.getItem("token");
-                  const res = await fetch(
-                    `${process.env.NEXT_PUBLIC_API_URL}/biogas/papers/${article.paper_id}/download`,
-                    { headers: token ? { Authorization: `Bearer ${token}` } : {} }
-                  );
-                  if (!res.ok) throw new Error("下载失败");
-                  const blob = await res.blob();
-                  const cd = res.headers.get("Content-Disposition") || "";
-                  const match = cd.match(/filename="?([^"]+)"?/);
-                  const filename = match?.[1] || "paper.pdf";
-                  const url = URL.createObjectURL(blob);
-                  const a = document.createElement("a");
-                  a.href = url;
-                  a.download = filename;
-                  document.body.appendChild(a);
-                  a.click();
-                  document.body.removeChild(a);
-                  URL.revokeObjectURL(url);
-                } catch {
-                  alert("下载失败，请稍后重试");
+          {article.paper_id ? (
+            <a
+              href="#"
+              onClick={async (e) => {
+                e.preventDefault();
+                if (user) {
+                  try {
+                    const token = localStorage.getItem("token");
+                    const res = await fetch(
+                      `${process.env.NEXT_PUBLIC_API_URL}/biogas/papers/${article.paper_id}/download`,
+                      { headers: token ? { Authorization: `Bearer ${token}` } : {} }
+                    );
+                    if (!res.ok) throw new Error("下载失败");
+                    const blob = await res.blob();
+                    const cd = res.headers.get("Content-Disposition") || "";
+                    const match = cd.match(/filename\*=UTF-8''(.+)/);
+                    const filename = match ? decodeURIComponent(match[1]) : "paper.pdf";
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement("a");
+                    a.href = url;
+                    a.download = filename;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                  } catch {
+                    alert("下载失败，请稍后重试");
+                  }
+                } else {
+                  setLoginOpen(true);
                 }
-              } else {
-                setLoginOpen(true);
-              }
-            }}
-            className="mt-1 block text-sm text-[#2E5A8F] hover:underline dark:text-blue-400"
-          >
-            {article.source_citation}
-          </a>
+              }}
+              className="mt-1 block text-sm text-[#2E5A8F] hover:underline dark:text-blue-400"
+            >
+              {article.source_citation}
+            </a>
+          ) : (
+            <span className="mt-1 block text-sm text-gray-400 dark:text-gray-500">
+              {article.source_citation}
+              <span className="ml-2 text-xs">（暂无原文可下载）</span>
+            </span>
+          )}
         </div>
       )}
 
