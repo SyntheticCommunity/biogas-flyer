@@ -67,6 +67,10 @@ src/
 
 自有服务器（阿里云轻量应用 2GB），systemd 服务 `biogas-frontend.service`（端口 3003），Nginx 反向代理。
 
+**部署方式：** push 到 `master` 分支后通过 webhook.bio-spring.top 自动部署，不要手动 SSH 部署。
+
+**注意：** 服务器无法通过 HTTPS（port 443）连接 GitHub，git remote 必须使用 SSH 协议（`git@github.com:SyntheticCommunity/biogas-flyer.git`）。部署脚本已包含 `git remote set-url` 确保协议正确。
+
 ## 测试环境
 
 本地无数据库访问权限，功能测试必须部署到服务器进行。
