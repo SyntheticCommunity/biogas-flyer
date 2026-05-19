@@ -30,6 +30,7 @@ interface Article {
   understanding_points: string[] | null;
   content_md: string | null;
   source_citation: string | null;
+  paper_id: number | null;
   authors: string | null;
   status: string;
   published_at: string | null;
@@ -152,10 +153,16 @@ export default function PostPage() {
           <div className="text-xs font-semibold text-gray-400 dark:text-gray-500">原始文献</div>
           <div className="mt-1 text-sm text-gray-600 dark:text-gray-400">{article.source_citation}</div>
           <button
-            onClick={() => {
-              if (user) {
-                // TODO: trigger actual PDF download
-                alert("PDF 下载功能即将上线");
+            onClick={async () => {
+              if (user && article.paper_id) {
+                try {
+                  const data = await fetchAPI<{ url: string }>(
+                    `/biogas/papers/${article.paper_id}/download`
+                  );
+                  window.open(data.url, "_blank");
+                } catch (err) {
+                  alert("下载失败，请稍后重试");
+                }
               } else {
                 setLoginOpen(true);
               }
