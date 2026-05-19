@@ -147,13 +147,14 @@ export default function PostPage() {
         </div>
       )}
 
-      {/* Source Citation + Download */}
+      {/* Source Citation */}
       {article.source_citation && (
         <div className="mb-10 rounded-xl border border-[#E5E1DB] bg-white p-5 dark:border-gray-700 dark:bg-gray-800">
           <div className="text-xs font-semibold text-gray-400 dark:text-gray-500">原始文献</div>
-          <div className="mt-1 text-sm text-gray-600 dark:text-gray-400">{article.source_citation}</div>
-          <button
-            onClick={async () => {
+          <a
+            href="#"
+            onClick={async (e) => {
+              e.preventDefault();
               if (user && article.paper_id) {
                 try {
                   const data = await fetchAPI<{ url: string }>(
@@ -165,21 +166,17 @@ export default function PostPage() {
                   document.body.appendChild(a);
                   a.click();
                   document.body.removeChild(a);
-                } catch (err) {
+                } catch {
                   alert("下载失败，请稍后重试");
                 }
               } else {
                 setLoginOpen(true);
               }
             }}
-            className="mt-4 inline-flex items-center gap-2 rounded-lg bg-[#1E3A5F] px-4 py-2 text-sm font-medium text-white transition hover:brightness-110"
+            className="mt-1 block text-sm text-[#2E5A8F] hover:underline dark:text-blue-400"
           >
-            <span>&darr;</span>
-            下载论文原文
-          </button>
-          {!user && (
-            <span className="ml-3 text-xs text-gray-400 dark:text-gray-500">登录后即可下载</span>
-          )}
+            {article.source_citation}
+          </a>
         </div>
       )}
 
