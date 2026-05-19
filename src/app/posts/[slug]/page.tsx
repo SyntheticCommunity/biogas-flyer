@@ -164,8 +164,17 @@ export default function PostPage() {
                       { headers: token ? { Authorization: `Bearer ${token}` } : {} }
                     );
                     if (!res.ok) throw new Error("下载失败");
-                    const data = await res.json();
-                    window.location.href = data.url;
+                    const { url: signedUrl } = await res.json();
+                    const fileRes = await fetch(signedUrl);
+                    const blob = await fileRes.blob();
+                    const blobUrl = URL.createObjectURL(blob);
+                    const a = document.createElement("a");
+                    a.href = blobUrl;
+                    a.download = "paper.pdf";
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(blobUrl);
                   } catch {
                     alert("下载失败，请稍后重试");
                   }
