@@ -4,10 +4,13 @@ import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { useState } from "react";
 import { fetchAPI } from "@/lib/api";
+import { useAuthStore } from "@/stores/auth";
 import UnderstandingCard from "@/components/UnderstandingCard";
 import ShareCardButton from "@/components/ShareCardButton";
 import QAPanel from "@/components/QAPanel";
+import LoginDialog from "@/components/LoginDialog";
 import Footer from "@/components/Footer";
 
 interface Article {
@@ -51,6 +54,8 @@ function formatDate(dateStr: string | null | undefined): string {
 export default function PostPage() {
   const params = useParams<{ slug: string }>();
   const slug = params?.slug;
+  const user = useAuthStore((s) => s.user);
+  const [loginOpen, setLoginOpen] = useState(false);
 
   const { data: article, isLoading, error } = useQuery<Article>({
     queryKey: ["article", slug],
@@ -142,34 +147,37 @@ export default function PostPage() {
         </div>
       )}
 
-      {/* Source Citation */}
+      {/* Source Citation + Download */}
       {article.source_citation && (
-        <footer className="mb-10 rounded-xl border border-gray-200 bg-gray-50 p-4 text-sm text-gray-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-400">
-          <span className="font-medium">来源：</span>
-          {article.source_citation}
-        </footer>
+        <div className="mb-10 rounded-xl border border-[#E5E1DB] bg-white p-5">
+          <div className="text-xs font-semibold text-gray-400">原始文献</div>
+          <div className="mt-1 text-sm text-gray-600">{article.source_citation}</div>
+          <button
+            onClick={() => {
+              if (user) {
+                // TODO: trigger actual PDF download
+                alert("PDF 下载功能即将上线");
+              } else {
+                setLoginOpen(true);
+              }
+            }}
+            className="mt-4 inline-flex items-center gap-2 rounded-lg bg-[#1E3A5F] px-4 py-2 text-sm font-medium text-white transition hover:brightness-110"
+          >
+            <span>&darr;</span>
+            下载论文原文
+          </button>
+          {!user && (
+            <span className="ml-3 text-xs text-gray-400">登录后即可下载</span>
+          )}
+        </div>
       )}
 
       {/* Q&A Panel */}
       <QAPanel articleId={article.id} />
-
-      {/* Download + Citation */}
-      <div className="mt-10 grid gap-4 md:grid-cols-2">
-        <div className="rounded-xl bg-[#1E3A5F] p-6 text-center text-white">
-          <div className="text-lg">&darr;</div>
-          <div className="mt-1 font-semibold">下载论文原文</div>
-          <div className="mt-1 text-xs text-white/60">登录后即可下载 PDF 原文</div>
-        </div>
-        {article.source_citation && (
-          <div className="rounded-xl border border-[#E5E1DB] bg-white p-5">
-            <div className="text-xs font-semibold text-gray-400">原始文献</div>
-            <div className="mt-1 text-sm text-gray-600">{article.source_citation}</div>
-          </div>
-        )}
-      </div>
     </article>
 
     <Footer />
+    <LoginDialog open={loginOpen} onClose={() => setLoginOpen(false)} />
     </>
   );
 }
