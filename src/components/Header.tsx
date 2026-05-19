@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useAuthStore } from "@/stores/auth";
 
 export default function Header() {
-  const { user, logout, isAdmin } = useAuthStore();
+  const { user, logout } = useAuthStore();
 
   return (
     <header className="sticky top-0 z-50 bg-[#1E3A5F]">
@@ -20,11 +20,6 @@ export default function Header() {
           <Link href="/about" className="text-white/80 transition hover:text-white">
             关于
           </Link>
-          {isAdmin() && (
-            <Link href="/admin" className="text-white/80 transition hover:text-white">
-              管理
-            </Link>
-          )}
           {user ? (
             <div className="flex items-center gap-3">
               <span className="text-white/60 text-xs">

@@ -9,7 +9,6 @@ import { fetchAPI } from "@/lib/api";
 import { useAuthStore } from "@/stores/auth";
 import UnderstandingCard from "@/components/UnderstandingCard";
 import ShareCardButton from "@/components/ShareCardButton";
-import QAPanel from "@/components/QAPanel";
 import LoginDialog from "@/components/LoginDialog";
 import Footer from "@/components/Footer";
 
@@ -172,8 +171,6 @@ export default function PostPage() {
         </div>
       )}
 
-      {/* Q&A Panel */}
-      <QAPanel articleId={article.id} />
     </article>
 
     <Footer />

@@ -2,7 +2,7 @@
 
 # 沼液还田科普平台 (biogas.bio-spring.top)
 
-面向农户和农技人员的沼液还田科研成果科普网站。核心流程：管理员上传论文 PDF → AI 自动生成科普文章和明白卡 → 用户阅读、下载原文、提问。
+面向农户和农技人员的沼液还田科研成果科普网站。纯展示站点，提供文章阅读和文献下载（登录后可下载原文 PDF）。
 
 ## 技术栈
 
@@ -19,7 +19,6 @@ src/
 ├── app/
 │   ├── page.tsx              首页（文章列表）
 │   ├── posts/[slug]/page.tsx 文章详情页
-│   ├── admin/page.tsx        管理后台（PDF 上传）
 │   ├── login/page.tsx        微信扫码登录
 │   ├── layout.tsx            根布局
 │   └── providers.tsx         React Query Provider
@@ -29,9 +28,7 @@ src/
 │   ├── ArticleCard.tsx       文章卡片
 │   ├── UnderstandingCard.tsx 明白卡要点
 │   ├── ShareCardButton.tsx   明白卡分享（html2canvas）
-│   ├── QAPanel.tsx           文章级问答面板
-│   ├── LoginDialog.tsx       登录弹窗
-│   └── PaperUpload.tsx       PDF 上传组件
+│   └── LoginDialog.tsx       登录弹窗
 ├── lib/
 │   └── api.ts                API 请求工具（自动带 JWT）
 └── stores/
@@ -45,8 +42,6 @@ src/
 主要 API 端点：
 - `GET /articles` — 文章列表
 - `GET /articles/{slug}` — 文章详情
-- `POST /qa` — 文章级问答
-- `POST /papers/upload` — PDF 上传（需管理员）
 - `GET /auth/wechat/qrcode` — 微信登录二维码
 - `GET /auth/me` — 当前用户信息
 

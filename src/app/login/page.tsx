@@ -36,7 +36,7 @@ export default function LoginPage() {
       localStorage.setItem("token", token);
 
       const meResult = await fetchAPI<{ data: { id: number; username: string; display_name: string | null; role: string } }>("/auth/me");
-      setAuth({ id: String(meResult.data.id), name: meResult.data.display_name || meResult.data.username, avatar_url: null, is_admin: meResult.data.role === "admin" }, token);
+      setAuth({ id: String(meResult.data.id), name: meResult.data.display_name || meResult.data.username, avatar_url: null }, token);
       router.replace("/");
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : "操作失败";

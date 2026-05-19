@@ -4,7 +4,6 @@ interface UserInfo {
   id: string;
   name: string | null;
   avatar_url: string | null;
-  is_admin: boolean;
 }
 
 interface AuthState {
@@ -12,10 +11,9 @@ interface AuthState {
   token: string | null;
   setAuth: (user: UserInfo, token: string) => void;
   logout: () => void;
-  isAdmin: () => boolean;
 }
 
-export const useAuthStore = create<AuthState>((set, get) => ({
+export const useAuthStore = create<AuthState>((set) => ({
   user: null,
   token: typeof window !== "undefined" ? localStorage.getItem("token") : null,
 
@@ -27,10 +25,5 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   logout: () => {
     localStorage.removeItem("token");
     set({ user: null, token: null });
-  },
-
-  isAdmin: () => {
-    const { user } = get();
-    return user?.is_admin ?? false;
   },
 }));
