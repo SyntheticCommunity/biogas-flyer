@@ -159,7 +159,12 @@ export default function PostPage() {
                   const data = await fetchAPI<{ url: string }>(
                     `/biogas/papers/${article.paper_id}/download`
                   );
-                  window.open(data.url, "_blank");
+                  const a = document.createElement("a");
+                  a.href = data.url;
+                  a.download = "";
+                  document.body.appendChild(a);
+                  a.click();
+                  document.body.removeChild(a);
                 } catch (err) {
                   alert("下载失败，请稍后重试");
                 }
