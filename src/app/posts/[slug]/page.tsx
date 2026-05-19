@@ -157,15 +157,24 @@ export default function PostPage() {
               e.preventDefault();
               if (user && article.paper_id) {
                 try {
-                  const data = await fetchAPI<{ url: string }>(
-                    `/biogas/papers/${article.paper_id}/download`
+                  const token = localStorage.getItem("token");
+                  const res = await fetch(
+                    `${process.env.NEXT_PUBLIC_API_URL}/biogas/papers/${article.paper_id}/download`,
+                    { headers: token ? { Authorization: `Bearer ${token}` } : {} }
                   );
+                  if (!res.ok) throw new Error("下载失败");
+                  const blob = await res.blob();
+                  const cd = res.headers.get("Content-Disposition") || "";
+                  const match = cd.match(/filename="?([^"]+)"?/);
+                  const filename = match?.[1] || "paper.pdf";
+                  const url = URL.createObjectURL(blob);
                   const a = document.createElement("a");
-                  a.href = data.url;
-                  a.download = "";
+                  a.href = url;
+                  a.download = filename;
                   document.body.appendChild(a);
                   a.click();
                   document.body.removeChild(a);
+                  URL.revokeObjectURL(url);
                 } catch {
                   alert("下载失败，请稍后重试");
                 }
