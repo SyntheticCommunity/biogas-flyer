@@ -2,5 +2,40 @@
   "enabledPlugins": {
     "superpowers@claude-plugins-official": true,
     "figma@claude-plugins-official": true
+  },
+  "permissions": {
+    "allow": [
+      "Bash(ls:*)",
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Bash(tree:*)",
+      "Bash(wc:*)",
+      "Bash(file:*)",
+      "Bash(stat:*)",
+      "Bash(which:*)",
+      "Bash(cat:*)",
+      "Bash(echo:*)",
+      "Bash(du:*)",
+      "Bash(diff:*)",
+      "Bash(curl:*)",
+      "Bash(ssh:*)",
+      "Bash(gh:*)",
+      "Bash(git log:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git show:*)",
+      "Bash(git branch:*)",
+      "Bash(git remote:*)",
+      "Bash(git log --oneline:*)",
+      "Bash(python -m pytest --collect-only:*)",
+      "Bash(python -m pytest tests/:*)",
+      "Bash(uvicorn main:*)",
+      "Bash(npm run dev:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run build:*)",
+      "Bash(npx next:*)",
+      "Bash(docker ps:*)",
+      "Bash(docker logs:*)"
+    ]
   }
 }

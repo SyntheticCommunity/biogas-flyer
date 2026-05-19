@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "沼液还田科普站",
-  description: "科学种田 · 绿色循环 · 乡村振兴",
+  description: "沼液还田科普站 - 科学还田 · 绿色循环 · 乡村振兴",
 };
 
 export default function RootLayout({

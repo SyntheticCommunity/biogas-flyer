@@ -3,6 +3,7 @@
 import { useQuery } from "@tanstack/react-query";
 import HeroBanner from "@/components/HeroBanner";
 import ArticleCard from "@/components/ArticleCard";
+import Footer from "@/components/Footer";
 import { fetchAPI } from "@/lib/api";
 
 interface ArticleListItem {
@@ -22,7 +23,7 @@ function ArticleListSkeleton() {
       {Array.from({ length: 4 }).map((_, i) => (
         <div
           key={i}
-          className="h-40 animate-pulse rounded-2xl border border-gray-200 bg-gray-100 dark:border-gray-700 dark:bg-gray-800"
+          className="h-40 animate-pulse rounded-xl border border-[#E5E1DB] bg-gray-100"
         />
       ))}
     </div>
@@ -39,21 +40,26 @@ export default function HomePage() {
     <>
       <HeroBanner />
 
-      <section id="articles" className="mx-auto max-w-5xl px-6 py-12">
-        <h2 className="mb-6 text-2xl font-bold text-gray-900 dark:text-gray-100">
-          最新文章
-        </h2>
+      <section id="articles" className="mx-auto max-w-5xl px-6 py-12 md:px-12">
+        <div className="mb-6 flex items-center justify-between">
+          <h2 className="text-xl font-bold text-gray-900">科普文章</h2>
+          {articles && articles.length > 0 && (
+            <span className="rounded-full bg-[#1E3A5F]/10 px-3 py-0.5 text-xs font-medium text-[#2E5A8F]">
+              {articles.length} 篇
+            </span>
+          )}
+        </div>
 
         {isLoading && <ArticleListSkeleton />}
 
         {error && (
-          <div className="rounded-2xl border border-red-200 bg-red-50 p-6 text-center text-red-700 dark:border-red-800 dark:bg-red-950 dark:text-red-300">
+          <div className="rounded-xl border border-red-200 bg-red-50 p-6 text-center text-red-700">
             文章加载失败，请稍后再试。
           </div>
         )}
 
         {articles && articles.length === 0 && (
-          <p className="text-gray-500 dark:text-gray-400">
+          <p className="py-12 text-center text-gray-400">
             暂无已发布文章，敬请期待。
           </p>
         )}
@@ -73,6 +79,8 @@ export default function HomePage() {
           </div>
         )}
       </section>
+
+      <Footer />
     </>
   );
 }

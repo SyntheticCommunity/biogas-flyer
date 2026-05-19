@@ -8,6 +8,7 @@ import { fetchAPI } from "@/lib/api";
 import UnderstandingCard from "@/components/UnderstandingCard";
 import ShareCardButton from "@/components/ShareCardButton";
 import QAPanel from "@/components/QAPanel";
+import Footer from "@/components/Footer";
 
 interface Article {
   id: string;
@@ -85,12 +86,13 @@ export default function PostPage() {
   }
 
   return (
+    <>
     <article className="mx-auto max-w-3xl px-6 py-12">
       {/* Header */}
       <header className="mb-8">
         <div className="flex items-center gap-2 mb-3">
           {article.category && (
-            <span className="inline-block rounded-full bg-green-100 px-3 py-0.5 text-xs font-medium text-green-800 dark:bg-green-900 dark:text-green-200">
+            <span className="inline-block rounded bg-blue-50 px-2.5 py-0.5 text-xs font-medium text-[#2E5A8F]">
               {article.category}
             </span>
           )}
@@ -150,6 +152,24 @@ export default function PostPage() {
 
       {/* Q&A Panel */}
       <QAPanel articleId={article.id} />
+
+      {/* Download + Citation */}
+      <div className="mt-10 grid gap-4 md:grid-cols-2">
+        <div className="rounded-xl bg-[#1E3A5F] p-6 text-center text-white">
+          <div className="text-lg">&darr;</div>
+          <div className="mt-1 font-semibold">下载论文原文</div>
+          <div className="mt-1 text-xs text-white/60">登录后即可下载 PDF 原文</div>
+        </div>
+        {article.source_citation && (
+          <div className="rounded-xl border border-[#E5E1DB] bg-white p-5">
+            <div className="text-xs font-semibold text-gray-400">原始文献</div>
+            <div className="mt-1 text-sm text-gray-600">{article.source_citation}</div>
+          </div>
+        )}
+      </div>
     </article>
+
+    <Footer />
+    </>
   );
 }
