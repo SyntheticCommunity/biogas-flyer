@@ -38,7 +38,27 @@ interface Article {
 }
 
 function ensureTableBlankLines(md: string): string {
-  return md.replace(/([^\n])\n(\|.+)/g, "$1\n\n$2");
+  const lines = md.split("\n");
+  const result: string[] = [];
+  let inList = false;
+
+  for (const line of lines) {
+    const trimmed = line.trimStart();
+    if (trimmed.startsWith("- ") || trimmed.startsWith("* ") || /^\d+\.\s/.test(trimmed)) {
+      inList = true;
+    } else if (trimmed === "") {
+      // blank line: keep inList state (list may continue after blank)
+    } else if (!trimmed.startsWith("|")) {
+      inList = false;
+    }
+
+    if (trimmed.startsWith("|") && inList) {
+      result.push("    " + line);
+    } else {
+      result.push(line);
+    }
+  }
+  return result.join("\n");
 }
 
 function formatDate(dateStr: string | null | undefined): string {
