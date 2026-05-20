@@ -32,6 +32,7 @@ interface Article {
   source_citation: string | null;
   paper_id: number | null;
   authors: string | null;
+  share_image_url: string | null;
   status: string;
   published_at: string | null;
   created_at: string | null;
@@ -140,7 +141,11 @@ export default function PostPage() {
 
       {/* Share Button */}
       <div className="mb-8">
-        <ShareCardButton />
+        <ShareCardButton
+          articleId={article.id}
+          articleSlug={article.slug}
+          shareImageUrl={article.share_image_url}
+        />
       </div>
 
       {/* Markdown Content */}
