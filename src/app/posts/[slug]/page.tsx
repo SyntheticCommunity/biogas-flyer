@@ -8,7 +8,6 @@ import { useState } from "react";
 import { fetchAPI } from "@/lib/api";
 import { useAuthStore } from "@/stores/auth";
 import UnderstandingCard from "@/components/UnderstandingCard";
-import ShareCardButton from "@/components/ShareCardButton";
 import LoginDialog from "@/components/LoginDialog";
 import Footer from "@/components/Footer";
 
@@ -32,7 +31,6 @@ interface Article {
   source_citation: string | null;
   paper_id: number | null;
   authors: string | null;
-  share_image_url: string | null;
   status: string;
   published_at: string | null;
   created_at: string | null;
@@ -136,15 +134,6 @@ export default function PostPage() {
           crop={article.crop}
           application_method={article.application_method}
           risk_control={article.risk_control}
-        />
-      </div>
-
-      {/* Share Button */}
-      <div className="mb-8">
-        <ShareCardButton
-          articleId={article.id}
-          articleSlug={article.slug}
-          shareImageUrl={article.share_image_url}
         />
       </div>
 
