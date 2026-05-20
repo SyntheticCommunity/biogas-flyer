@@ -37,6 +37,10 @@ interface Article {
   updated_at: string | null;
 }
 
+function ensureTableBlankLines(md: string): string {
+  return md.replace(/([^\n])\n(\|.+)/g, "$1\n\n$2");
+}
+
 function formatDate(dateStr: string | null | undefined): string {
   if (!dateStr) return "";
   try {
@@ -141,7 +145,7 @@ export default function PostPage() {
       {article.content_md && (
         <div className="prose prose-green max-w-none mb-10 dark:prose-invert">
           <ReactMarkdown remarkPlugins={[remarkGfm]}>
-            {article.content_md}
+            {ensureTableBlankLines(article.content_md)}
           </ReactMarkdown>
         </div>
       )}
