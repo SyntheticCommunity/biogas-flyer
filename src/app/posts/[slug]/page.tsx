@@ -129,7 +129,12 @@ export default function PostPage() {
       {/* Understanding Card */}
       <div className="mb-8">
         <UnderstandingCard
-          understanding_points={article.understanding_points}
+          slurry_type={article.slurry_type}
+          dosage={article.dosage}
+          soil_type={article.soil_type}
+          crop={article.crop}
+          application_method={article.application_method}
+          risk_control={article.risk_control}
         />
       </div>
 
