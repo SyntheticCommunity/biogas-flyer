@@ -24,7 +24,11 @@ function formatDate(dateStr: string | null | undefined): string {
 const categoryColors: Record<string, { bg: string; text: string }> = {
   水稻: { bg: "bg-blue-50 dark:bg-blue-950", text: "text-[#2E5A8F] dark:text-blue-300" },
   小麦: { bg: "bg-amber-50 dark:bg-amber-950", text: "text-amber-700 dark:text-amber-300" },
-  蔬菜: { bg: "bg-red-50 dark:bg-red-950", text: "text-red-700 dark:text-red-300" },
+  玉米: { bg: "bg-yellow-50 dark:bg-yellow-950", text: "text-yellow-700 dark:text-yellow-300" },
+  大豆: { bg: "bg-green-50 dark:bg-green-950", text: "text-green-700 dark:text-green-300" },
+  番茄: { bg: "bg-red-50 dark:bg-red-950", text: "text-red-700 dark:text-red-300" },
+  桃树: { bg: "bg-pink-50 dark:bg-pink-950", text: "text-pink-700 dark:text-pink-300" },
+  樱桃: { bg: "bg-rose-50 dark:bg-rose-950", text: "text-rose-700 dark:text-rose-300" },
 };
 
 export default function ArticleCard({
