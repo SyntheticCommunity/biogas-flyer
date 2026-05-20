@@ -37,6 +37,11 @@ interface Article {
   updated_at: string | null;
 }
 
+function fixApproximationTildes(md: string): string {
+  // Escape ~ used as approximation sign (between digits) but not as strikethrough
+  return md.replace(/(\d)~(?=\d)/g, "$1\\~");
+}
+
 function ensureTableBlankLines(md: string): string {
   const lines = md.split("\n");
   const result: string[] = [];
@@ -165,7 +170,7 @@ export default function PostPage() {
       {article.content_md && (
         <div className="prose prose-green max-w-none mb-10 dark:prose-invert">
           <ReactMarkdown remarkPlugins={[remarkGfm]}>
-            {ensureTableBlankLines(article.content_md)}
+            {ensureTableBlankLines(fixApproximationTildes(article.content_md))}
           </ReactMarkdown>
         </div>
       )}
