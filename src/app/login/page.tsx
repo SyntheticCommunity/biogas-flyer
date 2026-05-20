@@ -53,19 +53,20 @@ export default function LoginPage() {
           {isRegister ? "注册账号" : "登录"}
         </h1>
         <p className="mb-6 text-center text-sm text-gray-500 dark:text-gray-400">
-          {isRegister ? "创建新账号" : "使用账号密码登录"}
+          {isRegister ? "使用手机号注册，登录后可下载论文原文" : "使用手机号和密码登录"}
         </p>
 
         {error && <p className="mb-4 text-sm text-red-500 text-center">{error}</p>}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
-            type="text"
-            placeholder="用户名"
+            type="tel"
+            placeholder="手机号"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
-            minLength={3}
+            pattern="[0-9]{11}"
+            maxLength={11}
             className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-emerald-500 focus:outline-none dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100"
           />
           <input

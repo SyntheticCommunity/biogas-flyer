@@ -14,6 +14,7 @@ export default function LoginDialog({ open, onClose }: LoginDialogProps) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [isRegister, setIsRegister] = useState(false);
   const setAuth = useAuthStore((s) => s.setAuth);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -22,6 +23,13 @@ export default function LoginDialog({ open, onClose }: LoginDialogProps) {
     setLoading(true);
 
     try {
+      if (isRegister) {
+        await fetchAPI("/auth/register", {
+          method: "POST",
+          body: JSON.stringify({ username, password }),
+        });
+      }
+
       const loginResult = await fetchAPI<{ data: { access_token: string } }>("/auth/login", {
         method: "POST",
         body: JSON.stringify({ username, password }),
@@ -34,7 +42,7 @@ export default function LoginDialog({ open, onClose }: LoginDialogProps) {
       setAuth({ id: String(meResult.data.id), name: meResult.data.display_name || meResult.data.username, avatar_url: null }, token);
       onClose();
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : "登录失败";
+      const msg = err instanceof Error ? err.message : "操作失败";
       setError(msg);
     } finally {
       setLoading(false);
@@ -62,21 +70,23 @@ export default function LoginDialog({ open, onClose }: LoginDialogProps) {
         </button>
 
         <h3 className="mb-2 text-center text-lg font-bold text-gray-900 dark:text-gray-100">
-          登录
+          {isRegister ? "注册账号" : "登录"}
         </h3>
         <p className="mb-6 text-center text-sm text-gray-500 dark:text-gray-400">
-          使用账号密码登录
+          {isRegister ? "使用手机号注册，登录后可下载论文原文" : "使用账号密码登录"}
         </p>
 
         {error && <p className="mb-4 text-sm text-red-500 text-center">{error}</p>}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
-            type="text"
-            placeholder="用户名"
+            type="tel"
+            placeholder="手机号"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
+            pattern="[0-9]{11}"
+            maxLength={11}
             className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-emerald-500 focus:outline-none dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100"
           />
           <input
@@ -85,6 +95,7 @@ export default function LoginDialog({ open, onClose }: LoginDialogProps) {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            minLength={6}
             className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-emerald-500 focus:outline-none dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100"
           />
           <button
@@ -92,12 +103,18 @@ export default function LoginDialog({ open, onClose }: LoginDialogProps) {
             disabled={loading}
             className="w-full rounded-lg bg-emerald-600 py-2 text-sm font-medium text-white hover:bg-emerald-700 disabled:opacity-50"
           >
-            {loading ? "登录中..." : "登录"}
+            {loading ? "处理中..." : isRegister ? "注册并登录" : "登录"}
           </button>
         </form>
 
-        <p className="mt-4 text-center text-xs text-gray-400 dark:text-gray-500">
-          没有账号？请先到 <a href="https://bio-spring.top" target="_blank" className="text-emerald-600 hover:underline">bio-spring.top</a> 注册
+        <p className="mt-4 text-center text-sm text-gray-500">
+          {isRegister ? "已有账号？" : "没有账号？"}
+          <button
+            onClick={() => { setIsRegister(!isRegister); setError(null); }}
+            className="ml-1 text-emerald-600 hover:underline"
+          >
+            {isRegister ? "去登录" : "免费注册"}
+          </button>
         </p>
       </div>
     </div>

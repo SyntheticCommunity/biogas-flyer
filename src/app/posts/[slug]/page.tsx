@@ -180,40 +180,53 @@ export default function PostPage() {
         <div className="mb-10 rounded-xl border border-[#E5E1DB] bg-white p-5 dark:border-gray-700 dark:bg-gray-800">
           <div className="text-xs font-semibold text-gray-400 dark:text-gray-500">原始文献</div>
           {article.paper_id ? (
-            <a
-              href="#"
-              onClick={async (e) => {
-                e.preventDefault();
-                if (user) {
-                  try {
-                    const token = localStorage.getItem("token");
-                    const res = await fetch(
-                      `${process.env.NEXT_PUBLIC_API_URL}/biogas/papers/${article.paper_id}/download`,
-                      { headers: token ? { Authorization: `Bearer ${token}` } : {} }
-                    );
-                    if (!res.ok) throw new Error("下载失败");
-                    const { url: signedUrl } = await res.json();
-                    const fileRes = await fetch(signedUrl);
-                    const blob = await fileRes.blob();
-                    const blobUrl = URL.createObjectURL(blob);
-                    const a = document.createElement("a");
-                    a.href = blobUrl;
-                    a.download = "paper.pdf";
-                    document.body.appendChild(a);
-                    a.click();
-                    document.body.removeChild(a);
-                    URL.revokeObjectURL(blobUrl);
-                  } catch {
-                    alert("下载失败，请稍后重试");
+            <>
+              <a
+                href="#"
+                onClick={async (e) => {
+                  e.preventDefault();
+                  if (user) {
+                    try {
+                      const token = localStorage.getItem("token");
+                      const res = await fetch(
+                        `${process.env.NEXT_PUBLIC_API_URL}/biogas/papers/${article.paper_id}/download`,
+                        { headers: token ? { Authorization: `Bearer ${token}` } : {} }
+                      );
+                      if (!res.ok) throw new Error("下载失败");
+                      const { url: signedUrl } = await res.json();
+                      const fileRes = await fetch(signedUrl);
+                      const blob = await fileRes.blob();
+                      const blobUrl = URL.createObjectURL(blob);
+                      const a = document.createElement("a");
+                      a.href = blobUrl;
+                      a.download = "paper.pdf";
+                      document.body.appendChild(a);
+                      a.click();
+                      document.body.removeChild(a);
+                      URL.revokeObjectURL(blobUrl);
+                    } catch {
+                      alert("下载失败，请稍后重试");
+                    }
+                  } else {
+                    setLoginOpen(true);
                   }
-                } else {
-                  setLoginOpen(true);
-                }
-              }}
-              className="mt-1 block text-sm text-[#2E5A8F] hover:underline dark:text-blue-400"
-            >
-              {article.source_citation}
-            </a>
+                }}
+                className="mt-1 block text-sm text-[#2E5A8F] hover:underline dark:text-blue-400"
+              >
+                {article.source_citation}
+              </a>
+              {!user && (
+                <p className="mt-2 text-xs text-gray-400 dark:text-gray-500">
+                  登录后可下载论文原文，查看完整试验数据和图表。
+                  <button
+                    onClick={() => setLoginOpen(true)}
+                    className="ml-1 text-emerald-600 hover:underline dark:text-emerald-400"
+                  >
+                    立即注册/登录
+                  </button>
+                </p>
+              )}
+            </>
           ) : (
             <span className="mt-1 block text-sm text-gray-400 dark:text-gray-500">
               {article.source_citation}
