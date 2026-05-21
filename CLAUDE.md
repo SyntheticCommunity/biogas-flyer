@@ -21,7 +21,8 @@ src/
 ├── app/
 │   ├── page.tsx              首页（文章列表）
 │   ├── posts/[slug]/page.tsx 文章详情页（含 PDF 下载）
-│   ├── login/page.tsx        账号密码登录
+│   ├── login/page.tsx        手机号注册/登录
+│   ├── about/page.tsx        关于页面
 │   ├── layout.tsx            根布局
 │   └── providers.tsx         React Query Provider
 ├── components/
@@ -29,8 +30,7 @@ src/
 │   ├── HeroBanner.tsx        首页 Hero 区域
 │   ├── ArticleCard.tsx       文章卡片
 │   ├── UnderstandingCard.tsx 明白卡要点
-│   ├── ShareCardButton.tsx   明白卡分享（html2canvas）
-│   ├── LoginDialog.tsx       登录弹窗
+│   ├── LoginDialog.tsx       登录弹窗（含手机号注册）
 │   └── Footer.tsx            页脚
 ├── lib/
 │   └── api.ts                API 请求工具（自动带 JWT）
@@ -43,10 +43,11 @@ src/
 后端部署在 `api.bio-spring.top`，前端通过 `NEXT_PUBLIC_API_URL` 环境变量配置（默认 `https://api.bio-spring.top/api/v1`）。
 
 主要 API 端点：
-- `GET /articles` — 文章列表（公开）
+- `GET /articles` — 文章列表（公开，支持 crop 过滤）
 - `GET /articles/{slug}` — 文章详情（公开）
 - `GET /papers/{paper_id}/download` — 获取 PDF 签名 URL（需登录）
-- `POST /auth/login` — 账号密码登录
+- `POST /auth/register` — 手机号注册
+- `POST /auth/login` — 手机号+密码登录
 - `GET /auth/me` — 当前用户信息
 
 ## 设计规范
