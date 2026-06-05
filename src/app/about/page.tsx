@@ -74,16 +74,6 @@ export default function AboutPage() {
                 <div className="text-sm text-[#1E3A5F] dark:text-blue-300">slurry@hzau.edu.cn</div>
               </div>
               <div>
-                <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">联系人</div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">徐工（长投双新）</div>
-              </div>
-              <div>
-                <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">电话</div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">13871739715</div>
-              </div>
-            </div>
-            <div className="rounded-xl border border-[#E5E1DB] bg-white p-5 shadow-sm space-y-4 dark:border-gray-700 dark:bg-gray-800">
-              <div>
                 <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">地址</div>
                 <div className="text-sm text-gray-600 dark:text-gray-400">
                   武汉市洪山区华中农业大学资源与环境学院
@@ -94,6 +84,46 @@ export default function AboutPage() {
                 <div className="text-sm text-[#1E3A5F] dark:text-blue-300">biogas.bio-spring.top</div>
               </div>
             </div>
+            <div className="rounded-xl border border-[#E5E1DB] bg-white p-5 shadow-sm space-y-4 dark:border-gray-700 dark:bg-gray-800">
+              <div>
+                <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">联系人（长投双新·沼液还田）</div>
+                <div className="text-sm text-gray-600 dark:text-gray-400">徐工</div>
+              </div>
+              <div>
+                <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">电话</div>
+                <div className="text-sm text-[#1E3A5F] dark:text-blue-300">13871739715</div>
+              </div>
+              <p className="text-xs text-gray-400 dark:text-gray-500">
+                如有沼液还田需求，欢迎致电咨询
+              </p>
+            </div>
+          </div>
+
+          {/* 高德地图 */}
+          <div className="mt-6 overflow-hidden rounded-xl border border-[#E5E1DB] shadow-sm dark:border-gray-700">
+            <div className="flex items-center justify-between bg-white px-5 py-3 dark:bg-gray-800">
+              <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                长投双新 · 公司位置
+              </span>
+              <a
+                href="https://ditu.amap.com/search?query=湖北长投双新环保科技有限公司"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs text-[#1E3A5F] hover:underline dark:text-blue-300"
+              >
+                查看大图 →
+              </a>
+            </div>
+            <iframe
+              src="https://ditu.amap.com/search?query=湖北长投双新环保科技有限公司"
+              width="100%"
+              height="400"
+              className="block bg-white dark:bg-gray-800"
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="长投双新公司位置 - 高德地图"
+            />
           </div>
         </section>
       </div>
