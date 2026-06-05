@@ -50,11 +50,16 @@ export default function AboutPage() {
               湖北长投双新环保科技有限公司
             </h3>
             <p className="mt-3 leading-relaxed text-gray-600 dark:text-gray-400">
-              湖北省农业废弃物资源化利用重点企业，专注于沼气工程、沼液处理与还田技术推广。
-              公司与华中农业大学深度合作，将科研成果转化为可落地的农业生产方案，助力绿色循环农业发展。
+              湖北长投双新环保科技有限公司（简称"长投双新"）成立于2020年，是一家国有控股企业，注册资本4500万元，坐落于襄阳市老河口市温岗村。公司投资1.05亿元建设运营"老河口市农林生物质制气及发电项目"，引进德国半干式混合原料连续厌氧发酵工艺，年处理农业废弃物9.52万吨，将农林畜牧业、市政有机生活垃圾等转化为清洁能源（电力、天然气）及高品位有机肥、基质产品。
             </p>
-            <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">
-              业务范围：沼液处理 &middot; 还田方案设计 &middot; 技术培训 &middot; 示范推广
+            <p className="mt-3 leading-relaxed text-gray-600 dark:text-gray-400">
+              在沼气发电、生物天然气、有机肥等业务基础上，公司重点打造沼液还田板块，将厌氧发酵后的沼液转化为安全、高效的液态有机肥。沼液富含氮、磷、钾及多种活性物质，是优质的有机液体肥料，就近服务周边果园、农田，真正实现"养殖—沼气—沼液—种植"的闭环循环。
+            </p>
+            <p className="mt-3 leading-relaxed text-gray-600 dark:text-gray-400">
+              公司作为湖北省农业废弃物资源化利用重点企业，与华中农业大学资源与环境学院深度合作，共建沼液还田技术指导体系。沼液还田业务已稳定运营2年，与7家客户签订长期消纳合同。2025年全年消纳沼液21,147吨，2026年1—5月消纳量已达20,600吨，消纳规模快速增长。以老河口市洪山嘴地区的桃园、梨园、果园为代表的典型消纳场景，充分验证了沼液还田在果木种植中的实用性与经济性。
+            </p>
+            <p className="mt-3 leading-relaxed text-gray-600 dark:text-gray-400">
+              沼液还田是长投双新从"能源输出"向"农业服务延伸"的关键布局。通过将废弃物资源化末端产物高效回归土地，公司既解决了沼液消纳难题，也为周边农户提供了低成本、高肥效的有机替代方案，助力农业碳减排与耕地质量提升。
             </p>
           </div>
         </section>
@@ -69,8 +74,12 @@ export default function AboutPage() {
                 <div className="text-sm text-[#1E3A5F] dark:text-blue-300">slurry@hzau.edu.cn</div>
               </div>
               <div>
+                <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">联系人</div>
+                <div className="text-sm text-gray-600 dark:text-gray-400">徐工（长投双新）</div>
+              </div>
+              <div>
                 <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">电话</div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">027-8728-XXXX</div>
+                <div className="text-sm text-gray-600 dark:text-gray-400">13871739715</div>
               </div>
             </div>
             <div className="rounded-xl border border-[#E5E1DB] bg-white p-5 shadow-sm space-y-4 dark:border-gray-700 dark:bg-gray-800">
