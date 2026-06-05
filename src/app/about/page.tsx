@@ -71,7 +71,7 @@ export default function AboutPage() {
             <div className="rounded-xl border border-[#E5E1DB] bg-white p-5 shadow-sm space-y-4 dark:border-gray-700 dark:bg-gray-800">
               <div>
                 <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">邮箱</div>
-                <div className="text-sm text-[#1E3A5F] dark:text-blue-300">slurry@hzau.edu.cn</div>
+                <div className="text-sm text-[#1E3A5F] dark:text-blue-300">gaoch@mail.hzau.edu.cn</div>
               </div>
               <div>
                 <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">地址</div>
