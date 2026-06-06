@@ -1,4 +1,5 @@
 import Footer from "@/components/Footer";
+import MapSection from "@/components/MapSection";
 
 export const metadata = {
   title: "关于 - 沼液还田科普站",
@@ -106,24 +107,15 @@ export default function AboutPage() {
                 长投双新 · 公司位置
               </span>
               <a
-                href="https://ditu.amap.com/search?query=湖北长投双新环保科技有限公司"
+                href="https://uri.amap.com/marker?position=111.786581,32.473245&name=湖北长投双新环保科技有限公司"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-xs text-[#1E3A5F] hover:underline dark:text-blue-300"
               >
-                查看大图 →
+                导航到这里 →
               </a>
             </div>
-            <iframe
-              src="https://ditu.amap.com/search?query=湖北长投双新环保科技有限公司"
-              width="100%"
-              height="400"
-              className="block bg-white dark:bg-gray-800"
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="长投双新公司位置 - 高德地图"
-            />
+            <MapSection />
           </div>
         </section>
       </div>
