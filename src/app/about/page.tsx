@@ -97,7 +97,7 @@ export default function AboutPage() {
                 <div className="text-sm text-[#1E3A5F] dark:text-blue-300">13871739715</div>
               </div>
               <p className="text-xs text-gray-400 dark:text-gray-500">
-                如有沼液还田需求，欢迎致电咨询
+                如有技术服务需求，欢迎来信
               </p>
             </div>
           </div>
