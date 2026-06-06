@@ -71,6 +71,10 @@ export default function AboutPage() {
           <div className="grid gap-4 md:grid-cols-2">
             <div className="rounded-xl border border-[#E5E1DB] bg-white p-5 shadow-sm space-y-4 dark:border-gray-700 dark:bg-gray-800">
               <div>
+                <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">联系人</div>
+                <div className="text-sm text-gray-600 dark:text-gray-400">高老师</div>
+              </div>
+              <div>
                 <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">邮箱</div>
                 <div className="text-sm text-[#1E3A5F] dark:text-blue-300">gaoch@mail.hzau.edu.cn</div>
               </div>
@@ -80,15 +84,6 @@ export default function AboutPage() {
                   武汉市洪山区华中农业大学资源与环境学院
                 </div>
               </div>
-              <div>
-                <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">领域</div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">
-                  土壤健康 · 沼液还田 · 有机替代
-                </div>
-              </div>
-              <p className="text-xs text-gray-400 dark:text-gray-500">
-                如有技术服务需求，欢迎来信
-              </p>
             </div>
             <div className="rounded-xl border border-[#E5E1DB] bg-white p-5 shadow-sm space-y-4 dark:border-gray-700 dark:bg-gray-800">
               <div>
