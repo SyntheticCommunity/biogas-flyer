@@ -84,6 +84,9 @@ export default function AboutPage() {
                   武汉市洪山区华中农业大学资源与环境学院
                 </div>
               </div>
+              <p className="text-xs text-gray-400 dark:text-gray-500">
+                如有技术服务需求，欢迎来信洽谈
+              </p>
             </div>
             <div className="rounded-xl border border-[#E5E1DB] bg-white p-5 shadow-sm space-y-4 dark:border-gray-700 dark:bg-gray-800">
               <div>
