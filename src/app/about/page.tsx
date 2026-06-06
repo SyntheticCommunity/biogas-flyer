@@ -94,6 +94,12 @@ export default function AboutPage() {
                 <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">电话</div>
                 <div className="text-sm text-[#1E3A5F] dark:text-blue-300">13871739715</div>
               </div>
+              <div>
+                <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">地址</div>
+                <div className="text-sm text-gray-600 dark:text-gray-400">
+                  襄阳市老河口市竹林桥镇温岗村（见下方地图）
+                </div>
+              </div>
               <p className="text-xs text-gray-400 dark:text-gray-500">
                 如有沼液还田需求，欢迎致电咨询
               </p>
