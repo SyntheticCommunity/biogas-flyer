@@ -19,7 +19,7 @@ export default function MapSection() {
     const container = containerRef.current;
     if (!container) return;
 
-    const center: [number, number] = [111.786581, 32.473245];
+    const center: [number, number] = [111.784116, 32.463949];
     let map: any;
 
     const initMap = () => {

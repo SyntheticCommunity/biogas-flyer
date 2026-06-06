@@ -107,7 +107,7 @@ export default function AboutPage() {
                 长投双新 · 公司位置
               </span>
               <a
-                href="https://uri.amap.com/marker?position=111.786581,32.473245&name=湖北长投双新环保科技有限公司"
+                href="https://uri.amap.com/marker?position=111.784116,32.463949&name=湖北长投双新环保科技有限公司"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-xs text-[#1E3A5F] hover:underline dark:text-blue-300"
