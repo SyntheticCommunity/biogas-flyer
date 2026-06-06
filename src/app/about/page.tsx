@@ -81,8 +81,10 @@ export default function AboutPage() {
                 </div>
               </div>
               <div>
-                <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">网站</div>
-                <div className="text-sm text-[#1E3A5F] dark:text-blue-300">biogas.bio-spring.top</div>
+                <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">领域</div>
+                <div className="text-sm text-gray-600 dark:text-gray-400">
+                  土壤健康 · 沼液还田 · 有机替代
+                </div>
               </div>
             </div>
             <div className="rounded-xl border border-[#E5E1DB] bg-white p-5 shadow-sm space-y-4 dark:border-gray-700 dark:bg-gray-800">
