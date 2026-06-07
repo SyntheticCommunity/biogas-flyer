@@ -38,3 +38,81 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* ─── Decorative section divider ─── */
+.section-divider {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: center;
+  margin: 0 auto;
+}
+.section-divider::before,
+.section-divider::after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 1px;
+  background: var(--border);
+}
+.section-divider span {
+  display: block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* ─── Animations ─── */
+/* ─── Hero bottom curve ─── */
+.hero-curve::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: -10%;
+  width: 120%;
+  height: 48px;
+  background: var(--background);
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  pointer-events: none;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out both;
+}
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animation-delay-100 { animation-delay: 100ms; }
+.animation-delay-200 { animation-delay: 200ms; }
+.animation-delay-300 { animation-delay: 300ms; }
+
+/* ─── Stat card hover ─── */
+.stat-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(30, 58, 95, 0.12);
+}
+@media (prefers-color-scheme: dark) {
+  .stat-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  }
+}
+
