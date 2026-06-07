@@ -41,6 +41,27 @@ export default function AboutPage() {
               </div>
             ))}
           </div>
+
+          {/* 华中农业大学联系方式 */}
+          <div className="mt-8 rounded-xl border border-[#E5E1DB] bg-white p-5 shadow-sm space-y-4 dark:border-gray-700 dark:bg-gray-800">
+            <div>
+              <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">联系人</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400">高老师</div>
+            </div>
+            <div>
+              <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">邮箱</div>
+              <div className="text-sm text-[#1E3A5F] dark:text-blue-300">gaoch@mail.hzau.edu.cn</div>
+            </div>
+            <div>
+              <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">地址</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400">
+                武汉市洪山区华中农业大学资源与环境学院
+              </div>
+            </div>
+            <p className="text-xs text-gray-400 dark:text-gray-500">
+              如有技术服务需求，欢迎来信洽谈
+            </p>
+          </div>
         </section>
 
         {/* 技术合作方 */}
@@ -63,54 +84,30 @@ export default function AboutPage() {
               沼液还田是长投双新从"能源输出"向"农业服务延伸"的关键布局。通过将废弃物资源化末端产物高效回归土地，公司既解决了沼液消纳难题，也为周边农户提供了低成本、高肥效的有机替代方案，助力农业碳减排与耕地质量提升。
             </p>
           </div>
-        </section>
 
-        {/* 联系方式 */}
-        <section>
-          <h2 className="mb-4 text-2xl font-bold text-gray-900 dark:text-gray-100">联系我们</h2>
-          <div className="grid gap-4 md:grid-cols-2">
-            <div className="rounded-xl border border-[#E5E1DB] bg-white p-5 shadow-sm space-y-4 dark:border-gray-700 dark:bg-gray-800">
-              <div>
-                <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">联系人</div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">高老师</div>
-              </div>
-              <div>
-                <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">邮箱</div>
-                <div className="text-sm text-[#1E3A5F] dark:text-blue-300">gaoch@mail.hzau.edu.cn</div>
-              </div>
-              <div>
-                <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">地址</div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">
-                  武汉市洪山区华中农业大学资源与环境学院
-                </div>
-              </div>
-              <p className="text-xs text-gray-400 dark:text-gray-500">
-                如有技术服务需求，欢迎来信洽谈
-              </p>
+          {/* 长投双新联系方式 */}
+          <div className="mt-8 rounded-xl border border-[#E5E1DB] bg-white p-5 shadow-sm space-y-4 dark:border-gray-700 dark:bg-gray-800">
+            <div>
+              <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">联系人（沼液还田）</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400">徐工</div>
             </div>
-            <div className="rounded-xl border border-[#E5E1DB] bg-white p-5 shadow-sm space-y-4 dark:border-gray-700 dark:bg-gray-800">
-              <div>
-                <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">联系人（长投双新·沼液还田）</div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">徐工</div>
-              </div>
-              <div>
-                <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">电话</div>
-                <div className="text-sm text-[#1E3A5F] dark:text-blue-300">13871739715</div>
-              </div>
-              <div>
-                <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">地址</div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">
-                  襄阳市老河口市竹林桥镇温岗村（见下方地图）
-                </div>
-              </div>
-              <p className="text-xs text-gray-400 dark:text-gray-500">
-                如有沼液还田需求，欢迎致电咨询
-              </p>
+            <div>
+              <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">电话</div>
+              <div className="text-sm text-[#1E3A5F] dark:text-blue-300">13871739715</div>
             </div>
+            <div>
+              <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">地址</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400">
+                襄阳市老河口市竹林桥镇温岗村（见下方地图）
+              </div>
+            </div>
+            <p className="text-xs text-gray-400 dark:text-gray-500">
+              如有沼液还田需求，欢迎致电咨询
+            </p>
           </div>
 
           {/* 高德地图 */}
-          <div className="mt-6 overflow-hidden rounded-xl border border-[#E5E1DB] shadow-sm dark:border-gray-700">
+          <div className="mt-8 overflow-hidden rounded-xl border border-[#E5E1DB] shadow-sm dark:border-gray-700">
             <div className="flex items-center justify-between bg-white px-5 py-3 dark:bg-gray-800">
               <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
                 长投双新 · 公司位置
