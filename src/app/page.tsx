@@ -8,7 +8,7 @@ export interface ArticleListItem {
   subtitle: string | null;
   slug: string;
   category: string | null;
-  crop: string | null;
+  crop: string[] | null;
   status: string;
   published_at: string | null;
   created_at: string | null;

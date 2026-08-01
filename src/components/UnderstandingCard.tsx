@@ -2,15 +2,15 @@ interface UnderstandingCardProps {
   slurry_type: string | null;
   dosage: string | null;
   soil_type: string | null;
-  crop: string | null;
+  crop: string[] | null;
   application_method: string | null;
   risk_control: string | null;
 }
 
-const fields: { key: keyof UnderstandingCardProps; label: string }[] = [
+const fields: { key: keyof UnderstandingCardProps; label: string; format?: (v: unknown) => string }[] = [
   { key: "slurry_type", label: "沼液类型" },
   { key: "dosage", label: "沼液用量" },
-  { key: "crop", label: "试验作物" },
+  { key: "crop", label: "试验作物", format: (v) => (Array.isArray(v) ? v.join("、") : String(v)) },
   { key: "soil_type", label: "试验土壤" },
   { key: "application_method", label: "施用方式" },
   { key: "risk_control", label: "风险关注" },
@@ -32,13 +32,13 @@ export default function UnderstandingCard(props: UnderstandingCardProps) {
         明白卡
       </h3>
       <dl className="space-y-1.5">
-        {entries.map(({ key, label }) => (
+        {entries.map(({ key, label, format }) => (
           <div key={key} className="flex items-start gap-2 text-sm">
             <dt className="shrink-0 font-medium text-[#1E3A5F] dark:text-blue-300">
               {label}：
             </dt>
             <dd className="text-gray-700 dark:text-gray-300">
-              {props[key]}
+              {format ? format(props[key]) : props[key]}
             </dd>
           </div>
         ))}

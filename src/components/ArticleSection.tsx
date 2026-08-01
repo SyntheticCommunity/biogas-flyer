@@ -11,8 +11,11 @@ const CROP_FILTERS = [
   "玉米",
   "大豆",
   "番茄",
+  "黄瓜",
+  "西葫芦",
   "白菜",
   "生菜",
+  "空心菜",
   "辣椒",
   "茄子",
   "西瓜",
@@ -29,6 +32,7 @@ const CROP_FILTERS = [
   "棉花",
   "油菜",
   "花生",
+  "未知",
 ];
 
 export default function ArticleSection({ articles }: { articles: ArticleListItem[] }) {
@@ -37,8 +41,11 @@ export default function ArticleSection({ articles }: { articles: ArticleListItem
   const cropsInData = useMemo(() => {
     const cropSet = new Set<string>();
     for (const a of articles) {
-      const c = a.crop || a.category;
-      if (c) cropSet.add(c);
+      if (a.crop && a.crop.length > 0) {
+        for (const c of a.crop) cropSet.add(c);
+      } else if (a.category) {
+        cropSet.add(a.category);
+      }
     }
     return CROP_FILTERS.filter((f) => f === "全部" || cropSet.has(f));
   }, [articles]);
@@ -46,8 +53,10 @@ export default function ArticleSection({ articles }: { articles: ArticleListItem
   const filtered = useMemo(() => {
     if (activeCrop === "全部") return articles;
     return articles.filter((a) => {
-      const c = a.crop || a.category;
-      return c === activeCrop;
+      if (a.crop && a.crop.length > 0) {
+        return a.crop.includes(activeCrop);
+      }
+      return a.category === activeCrop;
     });
   }, [articles, activeCrop]);
 
@@ -96,7 +105,7 @@ export default function ArticleSection({ articles }: { articles: ArticleListItem
               title={article.title}
               subtitle={article.subtitle}
               slug={article.slug}
-              category={article.crop || article.category}
+              category={article.crop && article.crop.length > 0 ? article.crop[0] : article.category}
               publishedAt={article.published_at}
             />
           ))}
