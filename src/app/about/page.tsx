@@ -1,4 +1,5 @@
 import Footer from "@/components/Footer";
+import HeroBanner from "@/components/HeroBanner";
 import MapSection from "@/components/MapSection";
 
 export const metadata = {
@@ -99,17 +100,7 @@ export default function AboutPage() {
   return (
     <>
       {/* ─── Hero ─── */}
-      <section className="hero-curve relative bg-gradient-to-b from-[#1E3A5F] to-[#2E5A8F] text-white">
-        <div className="mx-auto max-w-5xl px-6 py-20 text-center md:py-28">
-          <div className="mx-auto mb-5 h-[3px] w-10 rounded bg-[#C4880C]" />
-          <h1 className="animate-fade-in-up text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl">
-            关于我们
-          </h1>
-          <p className="animation-delay-200 animate-fade-in-up mt-4 text-base text-white/70 md:text-lg">
-            科学还田 · 绿色循环 · 乡村振兴
-          </p>
-        </div>
-      </section>
+      <HeroBanner title="关于我们" showCurve />
 
       {/* ─── Content ─── */}
       <div className="mx-auto max-w-4xl px-6 py-16 md:px-12 md:py-20">
