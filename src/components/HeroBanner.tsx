@@ -1,12 +1,49 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
 export default function HeroBanner() {
+  const [isShrunk, setIsShrunk] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsShrunk(window.scrollY > 80);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <section className="relative bg-gradient-to-b from-[#1E3A5F] to-[#2E5A8F] text-white">
-      <div className="mx-auto max-w-5xl px-6 py-16 text-center md:py-24">
-        <div className="mx-auto mb-4 h-[3px] w-8 rounded bg-[#C4880C]" />
-        <h1 className="text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl">
+    <section
+      className={`sticky top-[52px] z-40 overflow-hidden bg-gradient-to-b from-[#1E3A5F] to-[#2E5A8F] text-white shadow-sm transition-all duration-300 ease-out ${
+        isShrunk ? "py-3" : "py-16 md:py-24"
+      }`}
+    >
+      <div className="mx-auto max-w-5xl px-6 text-center md:px-12">
+        {/* 金色装饰线 */}
+        <div
+          className={`mx-auto h-[3px] rounded bg-[#C4880C] transition-all duration-300 ${
+            isShrunk ? "mb-0 h-0 w-0 opacity-0" : "mb-4 w-8 opacity-100"
+          }`}
+        />
+        {/* 标题 */}
+        <h1
+          className={`font-bold tracking-tight transition-all duration-300 ${
+            isShrunk
+              ? "text-base md:text-lg"
+              : "text-3xl md:text-4xl lg:text-5xl"
+          }`}
+        >
           沼液还田科普站
         </h1>
-        <p className="mt-3 text-base text-white/70 md:text-lg">
+        {/* 副标题 */}
+        <p
+          className={`text-white/70 transition-all duration-300 ${
+            isShrunk
+              ? "mt-1 text-xs opacity-80"
+              : "mt-3 text-base opacity-100 md:text-lg"
+          }`}
+        >
           科学还田 · 绿色循环 · 乡村振兴
         </p>
       </div>
