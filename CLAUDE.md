@@ -10,7 +10,7 @@
 
 - Next.js 16 (App Router) + React 19 + Tailwind CSS 4
 - Tanstack Query（API 数据请求）
-- Zustand（登录态状态管理）
+- Zustand（登录态 + 页面标题状态管理）
 - react-markdown + remark-gfm（Markdown 渲染）
 - html2canvas（明白卡图片生成）
 
@@ -26,17 +26,40 @@ src/
 │   ├── layout.tsx            根布局
 │   └── providers.tsx         React Query Provider
 ├── components/
-│   ├── Header.tsx            导航栏（登录/注销）
-│   ├── HeroBanner.tsx        首页 Hero 区域
+│   ├── Header.tsx            导航栏（含滚动后中间标题显示）
+│   ├── HeroBanner.tsx        全站统一 Hero 区域（滚动收缩 + 底部弧线过渡）
 │   ├── ArticleCard.tsx       文章卡片
+│   ├── ArticleSection.tsx    文章列表 + 作物筛选标签
 │   ├── UnderstandingCard.tsx 明白卡要点
-│   ├── LoginDialog.tsx       登录弹窗（含手机号注册）
+│   ├── LoginDialog.tsx       登录弹窗
+│   ├── MapSection.tsx        高德地图组件
 │   └── Footer.tsx            页脚
 ├── lib/
 │   └── api.ts                API 请求工具（自动带 JWT）
 └── stores/
-    └── auth.ts               Zustand 登录状态
+    ├── auth.ts               Zustand 登录状态
+    └── page.ts               Zustand 当前页面标题/副标题（Header 中间显示用）
 ```
+
+## 组件说明
+
+### HeroBanner
+
+全站统一的首页 Hero 组件，支持 `title`、`subtitle`、`showCurve` 属性（默认 `showCurve = true`，底部弧线过渡）。
+
+**滚动动效：**
+- 页面顶部时：全宽渐变背景，大标题居中显示（`py-14 md:py-20`）
+- 向下滚动超过 80px 后：大 Banner 平滑收缩为 `max-h-0`，同时标题通过 Zustand `page.ts` store 同步到 Header 中间显示
+- 刷新页面后状态自动同步（`useEffect` 中立即调用 `handleScroll()`）
+
+### Header
+
+三段式导航栏：`Logo（左）| 页面标题（中，滚动后显示）| 导航链接（右）`。
+
+- 固定高度 `h-12`（48px），sticky 定位
+- 未滚动时中间标题隐藏（`opacity-0`）
+- 滚动超过 80px 后，中间淡入显示当前页面标题（`text-sm/md:text-base`）和副标题（`text-[10px]`，桌面端显示）
+- 标题内容通过 `stores/page.ts` 与 HeroBanner 同步
 
 ## API 对接
 
