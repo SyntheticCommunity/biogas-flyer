@@ -77,16 +77,23 @@ export default function HeroBanner({
         </div>
       </section>
 
-      {/* 收缩版 Banner - fixed 定位，不影响文档流 */}
-      <div
-        className={`fixed left-0 right-0 top-12 z-40 bg-gradient-to-b from-[#1E3A5F] to-[#2E5A8F] text-white shadow-sm transition-all duration-300 ease-out ${
-          isShrunk
-            ? "translate-y-0 opacity-100"
-            : "-translate-y-full opacity-0 pointer-events-none"
-        }`}
-      >
-        <div className="py-2">
-          <BannerContent isShrunk={true} title={title} subtitle={subtitle} />
+      {/* 收缩版 Banner - 居中紧凑显示 */}
+      <div className="fixed left-1/2 top-12 z-40 -translate-x-1/2">
+        <div
+          className={`bg-gradient-to-b from-[#1E3A5F]/90 to-[#2E5A8F]/90 backdrop-blur-sm rounded-b-xl shadow-md px-8 py-2 transition-all duration-300 ease-out ${
+            isShrunk
+              ? "translate-y-0 opacity-100"
+              : "-translate-y-full opacity-0 pointer-events-none"
+          }`}
+        >
+          <h1 className="whitespace-nowrap text-base font-bold tracking-tight text-white md:text-lg">
+            {title}
+          </h1>
+          {subtitle && (
+            <p className="mt-0.5 whitespace-nowrap text-xs text-white/70">
+              {subtitle}
+            </p>
+          )}
         </div>
       </div>
     </>
