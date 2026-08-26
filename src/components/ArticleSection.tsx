@@ -12,6 +12,7 @@ const CROP_FILTERS = [
   "大豆",
   "番茄",
   "黄瓜",
+  "甘蓝",
   "西葫芦",
   "白菜",
   "生菜",
@@ -32,7 +33,7 @@ const CROP_FILTERS = [
   "棉花",
   "油菜",
   "花生",
-  "未知",
+  "其它",
 ];
 
 export default function ArticleSection({ articles }: { articles: ArticleListItem[] }) {
