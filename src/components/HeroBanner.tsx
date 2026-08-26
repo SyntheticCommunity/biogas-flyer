@@ -52,7 +52,7 @@ interface HeroBannerProps {
 export default function HeroBanner({
   title = "沼液还田科普站",
   subtitle = "科学还田 · 绿色循环 · 乡村振兴",
-  showCurve = false,
+  showCurve = true,
 }: HeroBannerProps) {
   const [isShrunk, setIsShrunk] = useState(false);
   const setPageTitle = usePageStore((s) => s.setPageTitle);
