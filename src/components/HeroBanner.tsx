@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePageStore } from "@/stores/page";
 
 function BannerContent({
   isShrunk,
@@ -54,48 +55,30 @@ export default function HeroBanner({
   showCurve = false,
 }: HeroBannerProps) {
   const [isShrunk, setIsShrunk] = useState(false);
+  const setPageTitle = usePageStore((s) => s.setPageTitle);
+
+  useEffect(() => {
+    setPageTitle(title, subtitle);
+  }, [title, subtitle, setPageTitle]);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsShrunk(window.scrollY > 80);
     };
-    handleScroll(); // 立即同步一次，防止刷新后状态不同步
+    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <>
-      {/* 大 Banner - 正常文档流，滚动后自然离开视口 */}
-      <section
-        className={`relative overflow-hidden bg-gradient-to-b from-[#1E3A5F] to-[#2E5A8F] text-white transition-all duration-300 ease-out ${
-          isShrunk ? "max-h-0 opacity-0" : "max-h-[400px] opacity-100"
-        } ${showCurve ? "hero-curve" : ""}`}
-      >
-        <div className="py-14 md:py-20">
-          <BannerContent isShrunk={false} title={title} subtitle={subtitle} />
-        </div>
-      </section>
-
-      {/* 收缩版 Banner - 居中紧凑显示 */}
-      <div className="fixed left-1/2 top-12 z-40 -translate-x-1/2">
-        <div
-          className={`bg-gradient-to-b from-[#1E3A5F]/90 to-[#2E5A8F]/90 backdrop-blur-sm rounded-b-xl shadow-md px-8 py-2 transition-all duration-300 ease-out ${
-            isShrunk
-              ? "translate-y-0 opacity-100"
-              : "-translate-y-full opacity-0 pointer-events-none"
-          }`}
-        >
-          <h1 className="whitespace-nowrap text-base font-bold tracking-tight text-white md:text-lg">
-            {title}
-          </h1>
-          {subtitle && (
-            <p className="mt-0.5 whitespace-nowrap text-xs text-white/70">
-              {subtitle}
-            </p>
-          )}
-        </div>
+    <section
+      className={`relative overflow-hidden bg-gradient-to-b from-[#1E3A5F] to-[#2E5A8F] text-white transition-all duration-300 ease-out ${
+        isShrunk ? "max-h-0 opacity-0" : "max-h-[400px] opacity-100"
+      } ${showCurve ? "hero-curve" : ""}`}
+    >
+      <div className="py-14 md:py-20">
+        <BannerContent isShrunk={false} title={title} subtitle={subtitle} />
       </div>
-    </>
+    </section>
   );
 }
