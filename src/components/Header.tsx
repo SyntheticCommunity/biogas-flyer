@@ -8,7 +8,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 bg-[#1E3A5F]">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3.5 md:px-12">
+      <div className="mx-auto flex h-12 max-w-6xl items-center justify-between px-6 md:px-12">
         <Link href="/" className="flex items-center gap-2">
           <span className="text-xl font-bold text-[#C4880C]">沼</span>
           <span className="text-base font-medium text-white">液还田</span>

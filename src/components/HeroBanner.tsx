@@ -15,8 +15,8 @@ export default function HeroBanner() {
 
   return (
     <section
-      className={`sticky top-[52px] z-40 overflow-hidden bg-gradient-to-b from-[#1E3A5F] to-[#2E5A8F] text-white shadow-sm transition-all duration-300 ease-out ${
-        isShrunk ? "py-3" : "py-16 md:py-24"
+      className={`sticky top-12 z-40 overflow-hidden bg-gradient-to-b from-[#1E3A5F] to-[#2E5A8F] text-white shadow-sm transition-all duration-300 ease-out ${
+        isShrunk ? "py-2" : "py-14 md:py-20"
       }`}
     >
       <div className="mx-auto max-w-5xl px-6 text-center md:px-12">
